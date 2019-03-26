@@ -1,0 +1,10 @@
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\bin\Debug\MatrizEsparsa.exe.config
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\bin\Debug\MatrizEsparsa.exe
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\bin\Debug\MatrizEsparsa.pdb
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.csprojResolveAssemblyReference.cache
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.Form1.resources
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.Properties.Resources.resources
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.csproj.GenerateResource.Cache
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.csproj.CoreCompileInputs.cache
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.exe
+C:\Users\u18200\Documents\GitHub\ProjetoMatrizEsparsa\MatrizEsparsa\MatrizEsparsa\obj\Debug\MatrizEsparsa.pdb
