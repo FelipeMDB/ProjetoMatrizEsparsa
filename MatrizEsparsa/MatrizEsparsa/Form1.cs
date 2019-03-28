@@ -26,5 +26,10 @@ namespace MatrizEsparsa
         {
 
         }
+
+        public void FazerLeitura(ref ListaCircular)
+        {
+
+        }
     }
 }
