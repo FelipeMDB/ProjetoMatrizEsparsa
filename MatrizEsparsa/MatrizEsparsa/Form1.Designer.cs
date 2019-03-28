@@ -39,7 +39,7 @@
             this.btnSomarK = new System.Windows.Forms.Button();
             this.btnSomarMatrizes = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtK = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatriz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,6 +62,7 @@
             this.btnLerMatriz.TabIndex = 1;
             this.btnLerMatriz.Text = "Ler Arquivo";
             this.btnLerMatriz.UseVisualStyleBackColor = true;
+            this.btnLerMatriz.Click += new System.EventHandler(this.btnLerMatriz_Click);
             // 
             // btnInserir
             // 
@@ -133,6 +134,7 @@
             this.btnSomarK.TabIndex = 8;
             this.btnSomarK.Text = "Somar Constante K";
             this.btnSomarK.UseVisualStyleBackColor = true;
+            this.btnSomarK.Click += new System.EventHandler(this.btnSomarK_Click);
             // 
             // btnSomarMatrizes
             // 
@@ -153,15 +155,15 @@
             this.dataGridView1.Size = new System.Drawing.Size(387, 322);
             this.dataGridView1.TabIndex = 10;
             // 
-            // textBox1
+            // txtK
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(331, 465);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 25);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Text = "K";
+            this.txtK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtK.Location = new System.Drawing.Point(331, 465);
+            this.txtK.Multiline = true;
+            this.txtK.Name = "txtK";
+            this.txtK.Size = new System.Drawing.Size(121, 25);
+            this.txtK.TabIndex = 13;
+            this.txtK.Text = "K";
             // 
             // button1
             // 
@@ -179,7 +181,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1077, 498);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtK);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnSomarMatrizes);
             this.Controls.Add(this.btnSomarK);
@@ -213,7 +215,7 @@
         private System.Windows.Forms.Button btnSomarK;
         private System.Windows.Forms.Button btnSomarMatrizes;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtK;
         private System.Windows.Forms.Button button1;
     }
 }

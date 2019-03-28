@@ -16,5 +16,15 @@ namespace MatrizEsparsa
         {
             InitializeComponent();
         }
+
+        private void btnSomarK_Click(object sender, EventArgs e)
+        {
+            //SomarConstanteK(Int32(txtK.Text));
+        }
+
+        private void btnLerMatriz_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
