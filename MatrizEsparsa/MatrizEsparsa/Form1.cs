@@ -24,28 +24,27 @@ namespace MatrizEsparsa
 
         private void btnSomarK_Click(object sender, EventArgs e)
         {
-            //SomarConstanteK(Int32(txtK.Text));
+            //SomarConstanteK(int.Parse(txtK.Text));
         }
 
         private void btnLerMatriz_Click(object sender, EventArgs e)
         {
-            FazerLeitura(listaCircular);
+            FazerLeitura(ref listaCircular);
         }
 
         public void FazerLeitura(ref ListaCircular listaC)
         {
-            listaC = new ListaCircular();
+            listaC = new ListaCircular(2, 2);
             if (dlgAbrir.ShowDialog() == DialogResult.OK)
             {
                 var arquivo = new StreamReader(dlgAbrir.FileName);
                 while (!arquivo.EndOfStream)
                 {
                     Celula lido = Celula.LerRegistro(arquivo);
-                    listaC.AdicionarCelula();
+                    listaC.AdicionarCelula(lido.Linha, lido.Coluna, lido.Valor);
                 }
                 arquivo.Close();
                 listaC.Listar(dgvMatriz);
-
             }
         }
 
