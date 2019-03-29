@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 public class ListaCircular
 {
@@ -13,8 +14,13 @@ public class ListaCircular
     {
         cabeca = new Celula(null, null, -1, -1, 0);
         Celula primeira = cabeca;
+        qtasLinhas = linhas;
+        qtasColunas = colunas;
 
-        for (int i = 0; i < colunas; i++)
+        if (qtasLinhas <= 0 || qtasColunas <= 0)
+            throw new Exception("quantidade de linhas ou colunas inválida");
+
+        for (int i = 0; i < qtasColunas; i++)
         {
             cabeca.Direita = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Direita;
@@ -22,7 +28,7 @@ public class ListaCircular
         cabeca.Direita = primeira;
         cabeca = primeira;
 
-        for (int i = 0; i < linhas; i++)
+        for (int i = 0; i < qtasLinhas; i++)
         {
             cabeca.Abaixo = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Direita;
@@ -37,25 +43,29 @@ public class ListaCircular
 
         Celula nova = new Celula(null, null, linha, coluna, 0);
 
-        for (int i = 0; i <= coluna; i++)
+        for (int i = 1; i <= coluna; i++)
             atual = atual.Direita;
 
         bool achouPosicao = false;
         acima = atual;
         while (!achouPosicao)
         {
-            abaixo = atual.Abaixo;
-            if (abaixo.Linha > nova.Linha)
+            abaixo = acima.Abaixo;
+            if (abaixo == null)
+                achouPosicao = true;
+
+            else if (abaixo.Linha > nova.Linha)
                 achouPosicao = true;
 
             else if (abaixo.Linha == nova.Linha)
                 return true;
-
-            acima = acima.Abaixo;
+            
+            if(abaixo != null)
+                acima = acima.Abaixo;
         }
 
         atual = cabeca;
-        for (int i = 0; i <= linha; i++)
+        for (int i = 1; i <= linha; i++)
             atual = atual.Abaixo;
 
         achouPosicao = false;
@@ -63,10 +73,13 @@ public class ListaCircular
         while (!achouPosicao)
         {
             direita = esquerda.Direita;
-            if (direita.Linha > nova.Linha)
+            if (direita == null)
+                achouPosicao = true;
+            else if (direita.Linha > nova.Linha)
                 achouPosicao = true;
 
-            esquerda = esquerda.Direita;
+            if(direita != null)
+                esquerda = esquerda.Direita;
         }
 
         return false;
@@ -74,16 +87,44 @@ public class ListaCircular
 
     public void AdicionarCelula(int linha, int coluna, int valor)
     {
-        Celula acima = null, abaixo = null, direita = null, esquerda = null;
-
-        Celula nova = new Celula(null, null, linha, coluna, valor);
-
-        if(!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+        if (valor != 0)
         {
-            esquerda.Direita = nova;
-            nova.Direita = direita;
-            acima.Abaixo = nova;
-            nova.Abaixo = abaixo;
+            Celula acima = null, abaixo = null, direita = null, esquerda = null;
+
+            Celula nova = new Celula(null, null, linha, coluna, valor);
+
+            if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            {
+                esquerda.Direita = nova;
+                nova.Direita = direita;
+                acima.Abaixo = nova;
+                nova.Abaixo = abaixo;
+            }
+        }
+    }
+
+    public void ListarMatriz(DataGridView dgv)
+    {
+        dgv.RowCount = qtasLinhas;
+        dgv.ColumnCount = qtasColunas;
+
+        Celula coluna = cabeca;
+
+        for (int c = 1; c <= qtasColunas; c++)
+        {
+            coluna = coluna.Direita;
+            Celula linha = coluna;
+
+            for (int l = 1; l <= qtasLinhas; l++)
+            {
+                if(linha.Abaixo != null && linha.Abaixo.Linha.CompareTo(l) == 0)
+                {
+                    dgv.Rows[c].Cells[l].Value = linha.Valor;
+                    linha = linha.Abaixo;
+                }
+                else
+                    dgv.Rows[c].Cells[l].Value = linha.Valor;
+            }
         }
     }
 }

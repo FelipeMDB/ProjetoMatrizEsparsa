@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-public class Celula
+public class Celula : IGravarEmArquivo
 {
     protected Celula abaixo;
     protected Celula direita;
@@ -22,9 +22,27 @@ public class Celula
         Valor = valor;
     }
 
+    public static Celula LerArquivo(StreamReader arq)
+    {
+        int li=0, col=0, val=0;
+        if(!arq.EndOfStream)
+        {
+            string[] linha = arq.ReadLine().Split();
+            li = int.Parse(linha[0]);
+            col = int.Parse(linha[1]);
+            val = int.Parse(linha[2]);
+        }
+        return new Celula(null, null, li, col, val);
+    }
+
     public override string ToString()
     {
         return $"({linha}, {coluna}, {valor})";
+    }
+
+    public string ParaArquivo()
+    {
+        return linha + " " + coluna + " " + valor;
     }
 
     public Celula Abaixo { get => abaixo; set => abaixo = value; }
