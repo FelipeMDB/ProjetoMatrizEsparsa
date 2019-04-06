@@ -80,7 +80,6 @@
             this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // label1
             // 
@@ -254,7 +253,6 @@
             this.btnExibirMatrizUm.TabIndex = 29;
             this.btnExibirMatrizUm.Text = "Exibir matriz";
             this.btnExibirMatrizUm.UseVisualStyleBackColor = true;
-            this.btnExibirMatrizUm.Click += new System.EventHandler(this.btnExibirMatrizUm_Click_1);
             // 
             // btnLerMatrizUm
             // 
@@ -265,7 +263,6 @@
             this.btnLerMatrizUm.TabIndex = 24;
             this.btnLerMatrizUm.Text = "Ler Arquivo";
             this.btnLerMatrizUm.UseVisualStyleBackColor = true;
-            this.btnLerMatrizUm.Click += new System.EventHandler(this.btnLerMatrizUm_Click);
             // 
             // btnLimpar
             // 
@@ -280,7 +277,6 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
             this.button6.Location = new System.Drawing.Point(6, 101);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(152, 39);
@@ -291,7 +287,6 @@
             // btnInserir
             // 
             this.btnInserir.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInserir.ForeColor = System.Drawing.Color.Black;
             this.btnInserir.Location = new System.Drawing.Point(6, 145);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(152, 39);

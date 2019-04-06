@@ -85,7 +85,7 @@ public class ListaCircular
         return false;
     }
 
-    public void AdicionarCelula(int linha, int coluna, int valor)
+    public void AdicionarCelula(int linha, int coluna, double valor)
     {
         if (valor != 0)
         {

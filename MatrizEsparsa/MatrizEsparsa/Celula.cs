@@ -9,11 +9,11 @@ public class Celula : IGravarEmArquivo
 {
     protected Celula abaixo;
     protected Celula direita;
-    protected int valor;
+    protected double valor;
     protected int linha;
     protected int coluna;
 
-    public Celula(Celula abaixo, Celula direita, int linha, int coluna, int valor)
+    public Celula(Celula abaixo, Celula direita, int linha, int coluna, double valor)
     {
         Abaixo = abaixo;
         Direita = direita;
@@ -24,13 +24,14 @@ public class Celula : IGravarEmArquivo
 
     public static Celula LerRegistro(StreamReader arq)
     {
-        int li=0, col=0, val=0;
+        int li = 0, col = 0;
+        double val=0;
         if(!arq.EndOfStream)
         {
             string[] linha = arq.ReadLine().Split();
             li = int.Parse(linha[0]);
             col = int.Parse(linha[1]);
-            val = int.Parse(linha[2]);
+            val = double.Parse(linha[2]);
         }
         return new Celula(null, null, li, col, val);
     }
@@ -47,7 +48,7 @@ public class Celula : IGravarEmArquivo
 
     public Celula Abaixo { get => abaixo; set => abaixo = value; }
     public Celula Direita { get => direita; set => direita = value; }
-    public int Valor { get => valor; set => valor = value; }
+    public double Valor { get => valor; set => valor = value; }
     public int Coluna { get => coluna; set => coluna = value; }
     public int Linha { get => linha; set => linha = value; }
 }
