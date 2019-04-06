@@ -103,7 +103,9 @@ namespace MatrizEsparsa
 
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
-
+            ListaCircular resultado = lista1.MultiplicarMatrizes(lista2);
+            resultado.Listar(dgvResultado);
+            MessageBox.Show("Vá para a página resultados para visualizar a nova matriz");
         }
 
         private void Matrizes_Load(object sender, EventArgs e)

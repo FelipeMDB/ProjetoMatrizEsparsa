@@ -313,68 +313,47 @@ public class ListaCircular
     {
         int qtasLinhasNova = 0, qtasColunasNova;
 
-        if (qtasLinhas > outra.qtasLinhas)
+        if (qtasLinhas < outra.qtasLinhas)
             qtasLinhasNova = qtasLinhas;
         else
             qtasLinhasNova = outra.qtasLinhas;
 
-        if (qtasColunas > outra.qtasColunas)
+        if (qtasColunas < outra.qtasColunas)
             qtasColunasNova = qtasColunas;
         else
             qtasColunasNova = outra.qtasColunas;
 
-        ListaCircular listaSoma = new ListaCircular(qtasLinhasNova, qtasColunasNova);
+        ListaCircular listaMultiplicada = new ListaCircular(qtasLinhasNova, qtasColunasNova);
 
         Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
 
-        while (colunaThis != cabeca || colunaOutra != outra.cabeca)
+        while (colunaThis != cabeca && colunaOutra != outra.cabeca)
         {
-            if (colunaThis != cabeca && colunaOutra != outra.cabeca)
+            Celula linhaThis = colunaThis.Abaixo;
+            Celula linhaOutra = colunaOutra.Abaixo;
+            while (linhaThis != null && linhaOutra != null)
             {
-                Celula linhaThis = colunaThis.Abaixo;
-                Celula linhaOutra = colunaOutra.Abaixo;
-                while (linhaThis != null && linhaOutra != null)
+                if (linhaThis.Linha == linhaOutra.Linha)
                 {
-                    if (linhaThis.Linha == linhaOutra.Linha)
-                    {
-                        listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
-                        linhaThis = linhaThis.Abaixo;
-                        linhaOutra = linhaOutra.Abaixo;
-                    }
-                    else if (linhaThis.Linha < linhaOutra.Linha)
-                    {
-                        linhaThis = linhaThis.Abaixo;
-                    }
-                    else
-                    {
-                        linhaOutra = linhaOutra.Abaixo;
-                    }
+                    listaMultiplicada.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
+                    linhaThis = linhaThis.Abaixo;
+                    linhaOutra = linhaOutra.Abaixo;
                 }
-                colunaThis = colunaThis.Direita;
-                colunaOutra = colunaOutra.Direita;
-            }
-            else if (colunaThis != cabeca)
-            {
-                Celula linha = colunaThis.Abaixo;
-                while (linha != null)
+                else if (linhaThis.Linha < linhaOutra.Linha)
                 {
-                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
-                    linha = linha.Abaixo;
+                    linhaThis = linhaThis.Abaixo;
                 }
-                colunaThis = colunaThis.Direita;
-            }
-            else
-            {
-                Celula linha = colunaOutra.Abaixo;
-                while (linha != null)
+                else
                 {
-                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
-                    linha = linha.Abaixo;
+                    linhaOutra = linhaOutra.Abaixo;
                 }
-                colunaOutra = colunaOutra.Direita;
             }
+                
+            colunaThis = colunaThis.Direita;
+            colunaOutra = colunaOutra.Direita;
         }
-        return listaSoma;
+        
+        return listaMultiplicada;
     }
 }
 
