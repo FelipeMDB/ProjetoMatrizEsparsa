@@ -115,6 +115,7 @@
             this.btnSomarMatrizes.TabIndex = 9;
             this.btnSomarMatrizes.Text = "Somar Matrizes";
             this.btnSomarMatrizes.UseVisualStyleBackColor = true;
+            this.btnSomarMatrizes.Click += new System.EventHandler(this.btnSomarMatrizes_Click);
             // 
             // dgvMatrizDois
             // 
@@ -144,6 +145,7 @@
             this.button1.TabIndex = 14;
             this.button1.Text = "Multiplicar Matrizes";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dlgAbrir
             // 
@@ -217,6 +219,7 @@
             this.button6.TabIndex = 28;
             this.button6.Text = "Remover";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // btnInserir
             // 
@@ -228,6 +231,7 @@
             this.btnInserir.TabIndex = 25;
             this.btnInserir.Text = "Inserir";
             this.btnInserir.UseVisualStyleBackColor = true;
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // groupBox2
             // 
@@ -252,6 +256,7 @@
             this.btnLerMatrizDois.TabIndex = 15;
             this.btnLerMatrizDois.Text = "Ler Arquivo\r\n";
             this.btnLerMatrizDois.UseVisualStyleBackColor = true;
+            this.btnLerMatrizDois.Click += new System.EventHandler(this.btnLerMatrizDois_Click);
             // 
             // groupBox3
             // 

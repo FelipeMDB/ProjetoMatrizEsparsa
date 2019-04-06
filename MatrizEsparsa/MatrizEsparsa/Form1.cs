@@ -48,6 +48,11 @@ namespace MatrizEsparsa
             lista2.Listar(dgvMatrizUm);
         }
 
+        private void btnLerMatrizDois_Click(object sender, EventArgs e)
+        {
+            FazerLeitura(ref lista2);
+        }
+
         private void btnLerMatrizUm_Click(object sender, EventArgs e)
         {
             FazerLeitura(ref lista1);
@@ -67,6 +72,26 @@ namespace MatrizEsparsa
         {
             //LimparMatriz(lista1);
             //limparMatriz(lista2);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSomarMatrizes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
