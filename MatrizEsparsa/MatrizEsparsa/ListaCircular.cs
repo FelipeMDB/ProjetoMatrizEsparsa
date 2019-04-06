@@ -208,6 +208,174 @@ public class ListaCircular
             atual.Abaixo = null;
         }
     }
+
+    public void SomarConstanteK(int coluna, double k)
+    {
+        Celula atual = cabeca.Direita;
+        for(int i = 2; i<=coluna;i++)
+        {
+            atual = atual.Direita;
+        }
+
+        atual = atual.Abaixo;
+        while (atual != null)
+        {
+            atual.Valor = atual.Valor + k;
+            atual = atual.Abaixo;
+        }
+    }
+
+    public ListaCircular SomarMatrizes(ListaCircular outra)
+    {
+        int qtasLinhasNova = 0, qtasColunasNova;
+
+        if (qtasLinhas > outra.qtasLinhas)
+            qtasLinhasNova = qtasLinhas;
+        else
+            qtasLinhasNova = outra.qtasLinhas;
+
+        if (qtasColunas > outra.qtasColunas)
+            qtasColunasNova = qtasColunas;
+        else
+            qtasColunasNova = outra.qtasColunas;
+            
+        ListaCircular listaSoma = new ListaCircular(qtasLinhasNova, qtasColunasNova);
+        
+        Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
+
+        while (colunaThis != cabeca || colunaOutra != outra.cabeca)
+        {
+            if(colunaThis != cabeca && colunaOutra != outra.cabeca)
+            {
+                Celula linhaThis = colunaThis.Abaixo;
+                Celula linhaOutra = colunaOutra.Abaixo;
+                while(linhaThis != null || linhaOutra != null)
+                {
+                    if(linhaThis != null && linhaOutra != null)
+                    {
+                        if (linhaThis.Linha == linhaOutra.Linha)
+                        {
+                            listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
+                            linhaThis = linhaThis.Abaixo;
+                            linhaOutra = linhaOutra.Abaixo;
+                        }
+                        else if(linhaThis.Linha<linhaOutra.Linha)
+                        {
+                            listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
+                            linhaThis = linhaThis.Abaixo;
+                        }
+                        else
+                        {
+                            listaSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
+                            linhaOutra = linhaOutra.Abaixo;
+                        }
+
+                    }
+                    else if(linhaThis != null)
+                    {
+                        listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
+                        linhaThis = linhaThis.Abaixo;
+                    }
+                    else
+                    {
+                        listaSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
+                        linhaOutra = linhaOutra.Abaixo;
+                    }
+                }
+                colunaThis = colunaThis.Direita;
+                colunaOutra = colunaOutra.Direita;
+            }
+            else if(colunaThis != cabeca)
+            {
+                Celula linha = colunaThis.Abaixo;
+                while (linha != null)
+                {
+                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                    linha = linha.Abaixo;
+                }
+                colunaThis = colunaThis.Direita;
+            }
+            else
+            {
+                Celula linha = colunaOutra.Abaixo;
+                while (linha != null)
+                {
+                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                    linha = linha.Abaixo;
+                }
+                colunaOutra = colunaOutra.Direita;
+            }
+        }
+        return listaSoma;
+    }
+
+    public ListaCircular MultiplicarMatrizes(ListaCircular outra)
+    {
+        int qtasLinhasNova = 0, qtasColunasNova;
+
+        if (qtasLinhas > outra.qtasLinhas)
+            qtasLinhasNova = qtasLinhas;
+        else
+            qtasLinhasNova = outra.qtasLinhas;
+
+        if (qtasColunas > outra.qtasColunas)
+            qtasColunasNova = qtasColunas;
+        else
+            qtasColunasNova = outra.qtasColunas;
+
+        ListaCircular listaSoma = new ListaCircular(qtasLinhasNova, qtasColunasNova);
+
+        Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
+
+        while (colunaThis != cabeca || colunaOutra != outra.cabeca)
+        {
+            if (colunaThis != cabeca && colunaOutra != outra.cabeca)
+            {
+                Celula linhaThis = colunaThis.Abaixo;
+                Celula linhaOutra = colunaOutra.Abaixo;
+                while (linhaThis != null && linhaOutra != null)
+                {
+                    if (linhaThis.Linha == linhaOutra.Linha)
+                    {
+                        listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
+                        linhaThis = linhaThis.Abaixo;
+                        linhaOutra = linhaOutra.Abaixo;
+                    }
+                    else if (linhaThis.Linha < linhaOutra.Linha)
+                    {
+                        linhaThis = linhaThis.Abaixo;
+                    }
+                    else
+                    {
+                        linhaOutra = linhaOutra.Abaixo;
+                    }
+                }
+                colunaThis = colunaThis.Direita;
+                colunaOutra = colunaOutra.Direita;
+            }
+            else if (colunaThis != cabeca)
+            {
+                Celula linha = colunaThis.Abaixo;
+                while (linha != null)
+                {
+                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                    linha = linha.Abaixo;
+                }
+                colunaThis = colunaThis.Direita;
+            }
+            else
+            {
+                Celula linha = colunaOutra.Abaixo;
+                while (linha != null)
+                {
+                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                    linha = linha.Abaixo;
+                }
+                colunaOutra = colunaOutra.Direita;
+            }
+        }
+        return listaSoma;
+    }
 }
 
 

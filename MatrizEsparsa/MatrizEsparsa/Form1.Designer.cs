@@ -52,6 +52,10 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnExibirMatrizDois = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dgvResultado = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).BeginInit();
@@ -60,6 +64,10 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvMatrizUm
@@ -87,7 +95,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(450, 9);
+            this.label1.Location = new System.Drawing.Point(452, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(285, 30);
             this.label1.TabIndex = 7;
@@ -222,7 +230,7 @@
             this.groupBox1.Controls.Add(this.nLinha);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.DarkRed;
-            this.groupBox1.Location = new System.Drawing.Point(178, 437);
+            this.groupBox1.Location = new System.Drawing.Point(145, 406);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(380, 196);
             this.groupBox1.TabIndex = 21;
@@ -259,7 +267,7 @@
             this.groupBox2.Controls.Add(this.btnMultiplicarMatrizes);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.DarkRed;
-            this.groupBox2.Location = new System.Drawing.Point(595, 437);
+            this.groupBox2.Location = new System.Drawing.Point(564, 406);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(349, 196);
             this.groupBox2.TabIndex = 22;
@@ -285,7 +293,7 @@
             this.groupBox3.Controls.Add(this.btnLimpar);
             this.groupBox3.Controls.Add(this.dgvMatrizUm);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(17, 66);
+            this.groupBox3.Location = new System.Drawing.Point(6, 35);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(541, 365);
             this.groupBox3.TabIndex = 24;
@@ -331,7 +339,7 @@
             this.groupBox4.Controls.Add(this.btnLerMatrizDois);
             this.groupBox4.Controls.Add(this.dgvMatrizDois);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(595, 66);
+            this.groupBox4.Location = new System.Drawing.Point(564, 35);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(548, 365);
             this.groupBox4.TabIndex = 25;
@@ -349,18 +357,59 @@
             this.btnExibirMatrizDois.UseVisualStyleBackColor = true;
             this.btnExibirMatrizDois.Click += new System.EventHandler(this.btnExibirMatrizDois_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1141, 645);
+            this.tabControl1.TabIndex = 26;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1133, 619);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Matrizes";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvResultado);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1133, 619);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Resultados";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvResultado
+            // 
+            this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultado.Location = new System.Drawing.Point(191, 80);
+            this.dgvResultado.Name = "dgvResultado";
+            this.dgvResultado.Size = new System.Drawing.Size(706, 394);
+            this.dgvResultado.TabIndex = 0;
+            // 
             // Matrizes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 633);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1167, 665);
+            this.Controls.Add(this.tabControl1);
             this.Name = "Matrizes";
             this.Text = "Matrizes";
+            this.Load += new System.EventHandler(this.Matrizes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).EndInit();
@@ -370,8 +419,12 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -401,6 +454,10 @@
         private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnExibirMatrizDois;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dgvResultado;
     }
 }
 

@@ -20,13 +20,13 @@ namespace MatrizEsparsa
 
         public Matrizes()
         {
-            lista1 = new ListaCircular(2, 2);
             InitializeComponent();
         }
 
         private void btnSomarK_Click(object sender, EventArgs e)
         {
-            //SomarConstanteK(int.Parse(txtK.Text));
+            lista1.SomarConstanteK(Convert.ToInt32(nColuna.Value),double.Parse(txtValor.Text));
+            lista1.Listar(dgvMatrizUm);
         }
 
         public void FazerLeitura(ref ListaCircular listaC)
@@ -45,7 +45,7 @@ namespace MatrizEsparsa
 
         private void btnExibirMatrizDois_Click(object sender, EventArgs e)
         {
-            lista2.Listar(dgvMatrizUm);
+            lista2.Listar(dgvMatrizDois);
         }
 
         private void btnLerMatrizDois_Click(object sender, EventArgs e)
@@ -90,7 +90,9 @@ namespace MatrizEsparsa
 
         private void btnSomarMatrizes_Click(object sender, EventArgs e)
         {
-
+            ListaCircular resultado = lista1.SomarMatrizes(lista2);
+            resultado.Listar(dgvResultado);
+            MessageBox.Show("Vá para a página resultados para visualizar a nova matriz");
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
@@ -102,6 +104,12 @@ namespace MatrizEsparsa
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Matrizes_Load(object sender, EventArgs e)
+        {
+            lista1 = new ListaCircular(2, 2);
+            lista2 = new ListaCircular(2, 2);
         }
     }
 }
