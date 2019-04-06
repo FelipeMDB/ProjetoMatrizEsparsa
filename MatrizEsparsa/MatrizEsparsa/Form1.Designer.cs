@@ -34,15 +34,15 @@
             this.btnSomarK = new System.Windows.Forms.Button();
             this.btnSomarMatrizes = new System.Windows.Forms.Button();
             this.dgvMatrizDois = new System.Windows.Forms.DataGridView();
-            this.txtK = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtValor = new System.Windows.Forms.TextBox();
+            this.btnMultiplicarMatrizes = new System.Windows.Forms.Button();
             this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
             this.nLinha = new System.Windows.Forms.NumericUpDown();
             this.nColuna = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.btnInserir = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLerMatrizDois = new System.Windows.Forms.Button();
@@ -125,27 +125,27 @@
             this.dgvMatrizDois.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizDois.TabIndex = 10;
             // 
-            // txtK
+            // txtValor
             // 
-            this.txtK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtK.Location = new System.Drawing.Point(214, 47);
-            this.txtK.Multiline = true;
-            this.txtK.Name = "txtK";
-            this.txtK.Size = new System.Drawing.Size(121, 25);
-            this.txtK.TabIndex = 13;
-            this.txtK.Text = "K";
+            this.txtValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValor.Location = new System.Drawing.Point(214, 47);
+            this.txtValor.Multiline = true;
+            this.txtValor.Name = "txtValor";
+            this.txtValor.Size = new System.Drawing.Size(121, 25);
+            this.txtValor.TabIndex = 13;
+            this.txtValor.Text = "K";
             // 
-            // button1
+            // btnMultiplicarMatrizes
             // 
-            this.button1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(41, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 46);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Multiplicar Matrizes";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnMultiplicarMatrizes.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMultiplicarMatrizes.ForeColor = System.Drawing.Color.Black;
+            this.btnMultiplicarMatrizes.Location = new System.Drawing.Point(41, 53);
+            this.btnMultiplicarMatrizes.Name = "btnMultiplicarMatrizes";
+            this.btnMultiplicarMatrizes.Size = new System.Drawing.Size(120, 46);
+            this.btnMultiplicarMatrizes.TabIndex = 14;
+            this.btnMultiplicarMatrizes.Text = "Multiplicar Matrizes";
+            this.btnMultiplicarMatrizes.UseVisualStyleBackColor = true;
+            this.btnMultiplicarMatrizes.Click += new System.EventHandler(this.btnMultiplicarMatrizes_Click);
             // 
             // dlgAbrir
             // 
@@ -155,17 +155,37 @@
             // 
             this.nLinha.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.nLinha.Location = new System.Drawing.Point(88, 33);
+            this.nLinha.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nLinha.Name = "nLinha";
             this.nLinha.Size = new System.Drawing.Size(120, 24);
             this.nLinha.TabIndex = 17;
+            this.nLinha.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // nColuna
             // 
             this.nColuna.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.nColuna.Location = new System.Drawing.Point(88, 63);
+            this.nColuna.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nColuna.Name = "nColuna";
             this.nColuna.Size = new System.Drawing.Size(120, 24);
             this.nColuna.TabIndex = 18;
+            this.nColuna.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
@@ -194,10 +214,10 @@
             this.groupBox1.Controls.Add(this.btnSomarK);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.btnRemover);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnInserir);
-            this.groupBox1.Controls.Add(this.txtK);
+            this.groupBox1.Controls.Add(this.txtValor);
             this.groupBox1.Controls.Add(this.nColuna);
             this.groupBox1.Controls.Add(this.nLinha);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -209,17 +229,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operações com uma matriz";
             // 
-            // button6
+            // btnRemover
             // 
-            this.button6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(6, 101);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(152, 39);
-            this.button6.TabIndex = 28;
-            this.button6.Text = "Remover";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnRemover.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemover.ForeColor = System.Drawing.Color.Black;
+            this.btnRemover.Location = new System.Drawing.Point(6, 101);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(152, 39);
+            this.btnRemover.TabIndex = 28;
+            this.btnRemover.Text = "Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // btnInserir
             // 
@@ -236,7 +256,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnSomarMatrizes);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnMultiplicarMatrizes);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.DarkRed;
             this.groupBox2.Location = new System.Drawing.Point(595, 437);
@@ -363,8 +383,8 @@
         private System.Windows.Forms.Button btnSomarK;
         private System.Windows.Forms.Button btnSomarMatrizes;
         private System.Windows.Forms.DataGridView dgvMatrizDois;
-        private System.Windows.Forms.TextBox txtK;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtValor;
+        private System.Windows.Forms.Button btnMultiplicarMatrizes;
         private System.Windows.Forms.OpenFileDialog dlgAbrir;
         private System.Windows.Forms.NumericUpDown nLinha;
         private System.Windows.Forms.NumericUpDown nColuna;
@@ -377,7 +397,7 @@
         private System.Windows.Forms.Button btnExibirMatrizUm;
         private System.Windows.Forms.Button btnLerMatrizUm;
         private System.Windows.Forms.Button btnLimpar;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnRemover;
         private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnExibirMatrizDois;

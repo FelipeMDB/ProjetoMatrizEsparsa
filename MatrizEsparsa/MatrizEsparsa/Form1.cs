@@ -70,18 +70,22 @@ namespace MatrizEsparsa
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            //LimparMatriz(lista1);
-            //limparMatriz(lista2);
+            lista1.LimparMatriz();
+            lista1.Listar(dgvMatrizUm);
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
+            double numero;
 
+            if (!double.TryParse(txtValor.Text, out numero))
+                MessageBox.Show("Você deve digitar um número");
+            else
+            {
+                lista1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
+                lista1.Listar(dgvMatrizUm);
+            }
         }
 
         private void btnSomarMatrizes_Click(object sender, EventArgs e)
@@ -89,7 +93,13 @@ namespace MatrizEsparsa
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            lista1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
+            lista1.Listar(dgvMatrizUm);
+        }
+
+        private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
 
         }

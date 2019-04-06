@@ -63,8 +63,8 @@ public class ListaCircular
                 achouPosicao = true;
                 existe = true;
             }
-            
-            if(abaixo != null && !achouPosicao)
+
+            if (abaixo != null && !achouPosicao)
                 acima = acima.Abaixo;
         }
 
@@ -82,7 +82,7 @@ public class ListaCircular
             else if (direita.Linha > nova.Linha)
                 achouPosicao = true;
 
-            if(direita != null)
+            if (direita != null)
                 esquerda = esquerda.Direita;
         }
 
@@ -109,6 +109,8 @@ public class ListaCircular
 
     public void Listar(DataGridView dgv)
     {
+        dgv.Columns.Clear();
+        dgv.Rows.Clear();
         dgv.RowCount = qtasLinhas;
         dgv.ColumnCount = qtasColunas;
 
@@ -121,7 +123,7 @@ public class ListaCircular
 
             for (int l = 0; l < qtasLinhas; l++)
             {
-                if(linha.Abaixo != null && linha.Abaixo.Linha.CompareTo(l+1) == 0)
+                if (linha.Abaixo != null && linha.Abaixo.Linha.CompareTo(l + 1) == 0)
                 {
                     linha = linha.Abaixo;
                     dgv.Rows[l].Cells[c].Value = linha.Valor;
@@ -146,5 +148,66 @@ public class ListaCircular
         }
         return default(double);
     }
+
+    public void Inserir(int linha, int coluna, double valor)
+    {
+        if (linha <= qtasLinhas && coluna <= qtasColunas)
+        {
+            Celula acima = null, abaixo = null, direita = null, esquerda = null;
+
+            Celula nova = new Celula(null, null, linha, coluna, valor);
+
+            if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            {
+                esquerda.Direita = nova;
+                nova.Direita = direita;
+                acima.Abaixo = nova;
+                nova.Abaixo = abaixo;
+            }
+            else
+            {
+                MessageBox.Show("Já existe um valor nesta posição da matriz");
+            }
+        }
+        else
+        {
+            MessageBox.Show("Digite um valor nos limites da matriz");
+        }
+    }
+
+    public void Remover(int linha, int coluna)
+    {
+        if (linha <= qtasLinhas && coluna <= qtasColunas)
+        {
+            Celula acima = null, abaixo = null, direita = null, esquerda = null;
+
+
+            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            {
+                if (direita != null)
+                    esquerda.Direita = direita.Direita;
+                if (abaixo != null)
+                    acima.Abaixo = abaixo.Abaixo;
+            }
+        }
+        else
+        {
+            MessageBox.Show("Digite um valor nos limites da matriz");
+        }
+    }
+
+    public void LimparMatriz()
+    {
+        for (Celula atual = cabeca.Abaixo; atual!= cabeca ;atual = atual.Abaixo)
+        {
+            atual.Direita = null;
+        }
+
+        for(Celula atual = cabeca.Direita; atual!= cabeca; atual = atual.Direita)
+        {
+            atual.Abaixo = null;
+        }
+    }
 }
+
 
