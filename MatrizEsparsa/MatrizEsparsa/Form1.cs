@@ -11,14 +11,14 @@ using System.IO;
 
 namespace MatrizEsparsa
 {
-    public partial class Form1 : Form
+    public partial class Matrizes : Form
     {
 
         ListaCircular lista1;
         ListaCircular lista2;
 
 
-        public Form1()
+        public Matrizes()
         {
             lista1 = new ListaCircular(2, 2);
             InitializeComponent();
@@ -61,6 +61,12 @@ namespace MatrizEsparsa
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {lista1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            //LimparMatriz(lista1);
+            //limparMatriz(lista2);
         }
     }
 }

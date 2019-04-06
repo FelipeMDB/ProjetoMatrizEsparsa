@@ -1,6 +1,6 @@
 ﻿namespace MatrizEsparsa
 {
-    partial class Form1
+    partial class Matrizes
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -42,14 +42,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.btnInserir = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLerMatrizDois = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnExibirMatrizUm = new System.Windows.Forms.Button();
             this.btnLerMatrizUm = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.btnInserir = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnExibirMatrizDois = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
@@ -207,6 +207,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operações com uma matriz";
             // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.Location = new System.Drawing.Point(6, 101);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(152, 39);
+            this.button6.TabIndex = 28;
+            this.button6.Text = "Remover";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // btnInserir
+            // 
+            this.btnInserir.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInserir.ForeColor = System.Drawing.Color.Black;
+            this.btnInserir.Location = new System.Drawing.Point(6, 145);
+            this.btnInserir.Name = "btnInserir";
+            this.btnInserir.Size = new System.Drawing.Size(152, 39);
+            this.btnInserir.TabIndex = 25;
+            this.btnInserir.Text = "Inserir";
+            this.btnInserir.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnSomarMatrizes);
@@ -270,34 +292,13 @@
             // btnLimpar
             // 
             this.btnLimpar.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpar.Location = new System.Drawing.Point(6, 140);
+            this.btnLimpar.Location = new System.Drawing.Point(6, 141);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(121, 40);
             this.btnLimpar.TabIndex = 27;
             this.btnLimpar.Text = "Limpar Matriz";
             this.btnLimpar.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(6, 101);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(152, 39);
-            this.button6.TabIndex = 28;
-            this.button6.Text = "Remover";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // btnInserir
-            // 
-            this.btnInserir.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInserir.ForeColor = System.Drawing.Color.Black;
-            this.btnInserir.Location = new System.Drawing.Point(6, 145);
-            this.btnInserir.Name = "btnInserir";
-            this.btnInserir.Size = new System.Drawing.Size(152, 39);
-            this.btnInserir.TabIndex = 25;
-            this.btnInserir.Text = "Inserir";
-            this.btnInserir.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // groupBox4
             // 
@@ -323,7 +324,7 @@
             this.btnExibirMatrizDois.UseVisualStyleBackColor = true;
             this.btnExibirMatrizDois.Click += new System.EventHandler(this.btnExibirMatrizDois_Click);
             // 
-            // Form1
+            // Matrizes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -333,8 +334,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Matrizes";
+            this.Text = "Matrizes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).EndInit();
