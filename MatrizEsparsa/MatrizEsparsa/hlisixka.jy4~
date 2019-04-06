@@ -134,7 +134,7 @@ public class ListaCircular
 
     public double Buscar(int linha, int coluna)
     {
-        if (linha <= qtasLinhas && linha > 0 && coluna <= qtasColunas && coluna > 0)
+        if (linha <= qtasLinhas && coluna <= qtasColunas)
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
