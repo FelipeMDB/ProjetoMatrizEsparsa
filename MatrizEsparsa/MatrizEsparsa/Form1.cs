@@ -60,7 +60,7 @@ namespace MatrizEsparsa
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {lista1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
         }
     }
 }

@@ -52,16 +52,12 @@ public class ListaCircular
         {
             abaixo = acima.Abaixo;
             if (abaixo == null)
-            {
-                achouPosicao = true;
-                if (acima.Linha == nova.Linha)
-                    return true;
-            }
-
-            else if (acima.Linha > nova.Linha)
                 achouPosicao = true;
 
-            else if (acima.Linha == nova.Linha)
+            else if (abaixo.Linha > nova.Linha)
+                achouPosicao = true;
+
+            else if (abaixo.Linha == nova.Linha)
                 return true;
             
             if(abaixo != null)
@@ -132,19 +128,9 @@ public class ListaCircular
         }
     }
 
-    public double Buscar(int linha, int coluna)
+    public double Buscar()
     {
-        if (linha <= qtasLinhas && coluna <= qtasColunas)
-        {
-            Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
-            {
-                return acima.Valor;
-            }
-            return 0;
-        }
-        return -1;
     }
 }
 
