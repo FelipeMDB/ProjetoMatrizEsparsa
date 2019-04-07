@@ -24,17 +24,10 @@ namespace MatrizEsparsa
             InitializeComponent();
         }
 
-        public void Listar(ListaCruzada matrizM, DataGridView dgv)
-        {
-            exibindo = true;
-            matrizM.Listar(dgv);
-            exibindo = false;
-        }
-
         private void btnSomarK_Click(object sender, EventArgs e)  //soma a uma coluna da matriz, o valor de uma constante K
         {
             matriz1.SomarConstanteK(Convert.ToInt32(nColuna.Value),double.Parse(txtValor.Text));//parãmetros: a coluna e a constante
-            Listar(matriz1, dgvMatrizUm);        //listamos o resultado da soma
+            matriz1.Listar(dgvMatrizUm);        //listamos o resultado da soma
         }
 
         public void FazerLeitura(ref ListaCruzada matrizM)
@@ -60,7 +53,7 @@ namespace MatrizEsparsa
 
         private void btnExibirMatrizDois_Click(object sender, EventArgs e)
         {
-            Listar(matriz2, dgvMatrizDois);       //chama o método listar que lista a matriz em um dataGridView
+            matriz2.Listar(dgvMatrizDois);       //chama o método listar que lista a matriz em um dataGridView
         }
 
         private void btnLerMatrizDois_Click(object sender, EventArgs e)
@@ -75,7 +68,7 @@ namespace MatrizEsparsa
 
         private void btnExibirMatrizUm_Click_1(object sender, EventArgs e)
         {
-            Listar(matriz1, dgvMatrizUm);       //chama o método listar que lista a matriz em um dataGridView
+            matriz1.Listar(dgvMatrizUm);        //chama o método listar que lista a matriz em um dataGridView
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
@@ -86,7 +79,7 @@ namespace MatrizEsparsa
         private void btnLimpar_Click(object sender, EventArgs e)  //chama o método que libera todas as posições armazenadas de uma matriz c
         {                                                         //deixando-a completamente vazia
             matriz1.LimparMatriz();
-            Listar(matriz1, dgvMatrizUm);    //lista a matriz(neste caso vazia)
+            matriz1.Listar(dgvMatrizUm);    //lista a matriz(neste caso vazia)
         }
 
 
@@ -98,28 +91,28 @@ namespace MatrizEsparsa
                 MessageBox.Show("Você deve digitar um número"); //o método não será realizado e diremos a ela que ela deve inserir um valor numérico
             else
             {
-                matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
-                Listar(matriz1, dgvMatrizUm);  //lista a matriz com o novo valor
+                matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);  
+                matriz1.Listar(dgvMatrizUm);  //lista a matriz com o novo valor
             }
         }
 
         private void btnSomarMatrizes_Click(object sender, EventArgs e)   //chama método que Soma duas matrizes 
         {
             ListaCruzada resultado = matriz1.SomarMatrizes(matriz2);      //criamos uma terceira matriz que é a soma das duas já existentes
-            Listar(resultado, dgvResultado);                                //listamos a matriz
+            resultado.Listar(dgvResultado);                                //listamos a matriz
             tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
         }
 
         private void btnRemover_Click(object sender, EventArgs e)           //chamamos o método remover que remove o valor de uma célula
         {
             matriz1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value)); //parâmetros : coluna e linha do valor a ser removido
-            Listar(matriz1, dgvMatrizUm);        //listamos a matriz agora sem o valor removido
+            matriz1.Listar(dgvMatrizUm);        //listamos a matriz agora sem o valor removido
         }           
 
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
             ListaCruzada resultado = matriz1.MultiplicarMatrizes(matriz2);
-            Listar(resultado, dgvResultado);                                //listamos a matriz
+            resultado.Listar(dgvResultado);                                //listamos a matriz
             tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
         }
 
@@ -142,17 +135,13 @@ namespace MatrizEsparsa
                 int linha = e.RowIndex + 1;
                 double valor;
 
-                if (dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value != null && double.TryParse(dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value.ToString(), out valor))
+                if (double.TryParse(dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value.ToString(), out valor))
                 {
                     if (valor == 0)
                         matriz1.Remover(linha, coluna);
                     else
                         matriz1.Alterar(linha, coluna, valor);
                 }
-                else
-                    MessageBox.Show("Digite um valor válido");
-
-                Listar(matriz1, dgvMatrizUm);
             }
 
         }

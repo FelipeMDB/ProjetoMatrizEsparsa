@@ -191,10 +191,8 @@ public class ListaCruzada
 
             if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
             {
-                if (direita != null)
-                    esquerda.Direita = direita.Direita;
-                if (abaixo != null)
-                    acima.Abaixo = abaixo.Abaixo;
+                esquerda.Direita = direita.Direita;
+                acima.Abaixo = abaixo.Abaixo;
             }
         }
         else
@@ -404,6 +402,31 @@ public class ListaCruzada
             atual = atual.Direita;
         }
         arq.Close();
+    }
+
+    public void Alterar(int linha, int coluna, double valor)
+    {
+        Celula acima = null, abaixo = null, direita = null, esquerda = null;
+        
+        if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+        {
+            if (valor == 0)
+            {
+                esquerda.Direita = direita.Direita;
+                acima.Abaixo = abaixo.Abaixo;
+            }
+            else
+                direita.Valor = valor;
+        }
+        else
+        {
+            Celula nova = new Celula(null, null, linha, coluna, valor);
+
+            esquerda.Direita = nova;
+            nova.Direita = direita;
+            acima.Abaixo = nova;
+            nova.Abaixo = abaixo;
+        }
     }
 }
 

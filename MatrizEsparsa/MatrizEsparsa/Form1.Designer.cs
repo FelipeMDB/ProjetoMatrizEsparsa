@@ -78,6 +78,7 @@
             this.dgvMatrizUm.Name = "dgvMatrizUm";
             this.dgvMatrizUm.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizUm.TabIndex = 0;
+            this.dgvMatrizUm.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatrizUm_CellValueChanged);
             // 
             // btnBuscar
             // 
