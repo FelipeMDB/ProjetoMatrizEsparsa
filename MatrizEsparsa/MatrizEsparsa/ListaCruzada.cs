@@ -86,8 +86,10 @@ public class ListaCruzada
                 achouPosicao = true;
             else if (direita.Linha > nova.Linha)
                 achouPosicao = true;
+            else if (direita.Linha == nova.Linha)
+                achouPosicao = true;
 
-            if (direita != cabecaLinha)
+            if (direita != cabecaLinha && !achouPosicao)
                 esquerda = esquerda.Direita;
         }
 
@@ -205,12 +207,12 @@ public class ListaCruzada
     {
         for (Celula atual = cabeca.Abaixo; atual!= cabeca ;atual = atual.Abaixo)
         {
-            atual.Direita = null;
+            atual.Direita = atual;
         }
 
         for(Celula atual = cabeca.Direita; atual!= cabeca; atual = atual.Direita)
         {
-            atual.Abaixo = null;
+            atual.Abaixo = atual;
         }
     }
 
@@ -236,9 +238,9 @@ public class ListaCruzada
                     Remover(atual.Linha, atual.Coluna);
                 else
                     atual.Valor = atual.Valor + k;
-            }
-            if(atual != atualCabeca)
+
                 atual = atual.Abaixo;
+            }
         }
     }
 
@@ -382,6 +384,7 @@ public class ListaCruzada
 
     public void Gravar(StreamWriter arq)
     {
+        arq.WriteLine(qtasLinhas + " " + qtasColunas);
         Celula atual = cabeca.Direita;
         int coluna = 1;
         while (atual != cabeca)
