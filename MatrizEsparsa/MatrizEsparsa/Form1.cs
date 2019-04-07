@@ -14,9 +14,9 @@ namespace MatrizEsparsa
     public partial class Matrizes : Form
     {
 
-        ListaCircular lista1;
-        ListaCircular lista2;
-
+        ListaCruzada matriz1;
+        ListaCruzada matriz2;
+        String arquivoMatriz1;
 
         public Matrizes()
         {
@@ -25,19 +25,20 @@ namespace MatrizEsparsa
 
         private void btnSomarK_Click(object sender, EventArgs e)
         {
-            lista1.SomarConstanteK(Convert.ToInt32(nColuna.Value),double.Parse(txtValor.Text));
-            lista1.Listar(dgvMatrizUm);
+            matriz1.SomarConstanteK(Convert.ToInt32(nColuna.Value),double.Parse(txtValor.Text));
+            matriz1.Listar(dgvMatrizUm);
         }
 
-        public void FazerLeitura(ref ListaCircular listaC)
+        public void FazerLeitura(ref ListaCruzada matrizM)
         {
             if (dlgAbrir.ShowDialog() == DialogResult.OK)
             {
-                var arquivo = new StreamReader(dlgAbrir.FileName);
+                arquivoMatriz1 = dlgAbrir.FileName;
+                var arquivo = new StreamReader(arquivoMatriz1);
                 while (!arquivo.EndOfStream)
                 {
                     Celula lido = Celula.LerRegistro(arquivo);
-                    listaC.AdicionarCelula(lido.Linha, lido.Coluna, lido.Valor);
+                    matrizM.AdicionarCelula(lido.Linha, lido.Coluna, lido.Valor);
                 }
                 arquivo.Close();
             }
@@ -45,33 +46,33 @@ namespace MatrizEsparsa
 
         private void btnExibirMatrizDois_Click(object sender, EventArgs e)
         {
-            lista2.Listar(dgvMatrizDois);
+            matriz2.Listar(dgvMatrizDois);
         }
 
         private void btnLerMatrizDois_Click(object sender, EventArgs e)
         {
-            FazerLeitura(ref lista2);
+            FazerLeitura(ref matriz2);
         }
 
         private void btnLerMatrizUm_Click(object sender, EventArgs e)
         {
-            FazerLeitura(ref lista1);
+            FazerLeitura(ref matriz1);
         }
 
         private void btnExibirMatrizUm_Click_1(object sender, EventArgs e)
         {
-            lista1.Listar(dgvMatrizUm);
+            matriz1.Listar(dgvMatrizUm);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {lista1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
+            MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            lista1.LimparMatriz();
-            lista1.Listar(dgvMatrizUm);
+            matriz1.LimparMatriz();
+            matriz1.Listar(dgvMatrizUm);
         }
 
 
@@ -83,35 +84,40 @@ namespace MatrizEsparsa
                 MessageBox.Show("Você deve digitar um número");
             else
             {
-                lista1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
-                lista1.Listar(dgvMatrizUm);
+                matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
+                matriz1.Listar(dgvMatrizUm);
             }
         }
 
         private void btnSomarMatrizes_Click(object sender, EventArgs e)
         {
-            ListaCircular resultado = lista1.SomarMatrizes(lista2);
+            ListaCruzada resultado = matriz1.SomarMatrizes(matriz2);
             resultado.Listar(dgvResultado);
             MessageBox.Show("Vá para a página resultados para visualizar a nova matriz");
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            lista1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
-            lista1.Listar(dgvMatrizUm);
+            matriz1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
+            matriz1.Listar(dgvMatrizUm);
         }
 
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
-            ListaCircular resultado = lista1.MultiplicarMatrizes(lista2);
+            ListaCruzada resultado = matriz1.MultiplicarMatrizes(matriz2);
             resultado.Listar(dgvResultado);
             MessageBox.Show("Vá para a página resultados para visualizar a nova matriz");
         }
 
         private void Matrizes_Load(object sender, EventArgs e)
         {
-            lista1 = new ListaCircular(2, 2);
-            lista2 = new ListaCircular(2, 2);
+            matriz1 = new ListaCruzada(2, 2);
+            matriz2 = new ListaCruzada(2, 2);
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            matriz1.Gravar(new StreamWriter(arquivoMatriz1));
         }
     }
 }

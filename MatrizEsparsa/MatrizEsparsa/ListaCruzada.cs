@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public class ListaCircular
+public class ListaCruzada
 {
     protected Celula cabeca;
     protected int qtasLinhas, qtasColunas;
 
-    public ListaCircular(int linhas, int colunas)
+    public ListaCruzada(int linhas, int colunas)
     {
         cabeca = new Celula(null, null, -1, -1, 0);
         Celula primeira = cabeca;
@@ -24,6 +25,7 @@ public class ListaCircular
         {
             cabeca.Direita = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Direita;
+            cabeca.Abaixo = cabeca;
         }
         cabeca.Direita = primeira;
         cabeca = primeira;
@@ -32,6 +34,7 @@ public class ListaCircular
         {
             cabeca.Abaixo = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Abaixo;
+            cabeca.Direita = cabeca;
         }
         cabeca.Abaixo = primeira;
         cabeca = primeira;
@@ -47,12 +50,13 @@ public class ListaCircular
         for (int i = 1; i <= coluna; i++)
             atual = atual.Direita;
 
+        Celula cabecaColuna = atual;
         bool achouPosicao = false;
         acima = atual;
         while (!achouPosicao)
         {
             abaixo = acima.Abaixo;
-            if (abaixo == null)
+            if (abaixo == cabecaColuna)
                 achouPosicao = true;
 
             else if (abaixo.Linha > nova.Linha)
@@ -64,7 +68,7 @@ public class ListaCircular
                 existe = true;
             }
 
-            if (abaixo != null && !achouPosicao)
+            if (abaixo != cabecaColuna && !achouPosicao)
                 acima = acima.Abaixo;
         }
 
@@ -72,17 +76,18 @@ public class ListaCircular
         for (int i = 1; i <= linha; i++)
             atual = atual.Abaixo;
 
+        Celula cabecaLinha = atual;
         achouPosicao = false;
         esquerda = atual;
         while (!achouPosicao)
         {
             direita = esquerda.Direita;
-            if (direita == null)
+            if (direita == cabecaLinha)
                 achouPosicao = true;
             else if (direita.Linha > nova.Linha)
                 achouPosicao = true;
 
-            if (direita != null)
+            if (direita != cabecaLinha)
                 esquerda = esquerda.Direita;
         }
 
@@ -217,15 +222,27 @@ public class ListaCircular
             atual = atual.Direita;
         }
 
+        Celula atualCabeca = atual;
         atual = atual.Abaixo;
-        while (atual != null)
+        int linha = 0;
+        while (linha != qtasLinhas)
         {
-            atual.Valor = atual.Valor + k;
-            atual = atual.Abaixo;
+            linha++;
+            if (atual == atualCabeca || atual.Linha != linha)
+                Inserir(linha, coluna, k);
+            else
+            {
+                if (atual.Valor + k == 0)
+                    Remover(atual.Linha, atual.Coluna);
+                else
+                    atual.Valor = atual.Valor + k;
+            }
+            if(atual != atualCabeca)
+                atual = atual.Abaixo;
         }
     }
 
-    public ListaCircular SomarMatrizes(ListaCircular outra)
+    public ListaCruzada SomarMatrizes(ListaCruzada outra)
     {
         int qtasLinhasNova = 0, qtasColunasNova;
 
@@ -239,7 +256,7 @@ public class ListaCircular
         else
             qtasColunasNova = outra.qtasColunas;
             
-        ListaCircular listaSoma = new ListaCircular(qtasLinhasNova, qtasColunasNova);
+        ListaCruzada listaSoma = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
         
         Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
 
@@ -247,15 +264,18 @@ public class ListaCircular
         {
             if(colunaThis != cabeca && colunaOutra != outra.cabeca)
             {
-                Celula linhaThis = colunaThis.Abaixo;
-                Celula linhaOutra = colunaOutra.Abaixo;
-                while(linhaThis != null || linhaOutra != null)
+                Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
+
+                Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
+
+                while(linhaThis != linhaCabecaThis || linhaOutra != linhaCabecaOutra)
                 {
-                    if(linhaThis != null && linhaOutra != null)
+                    if(linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
                     {
                         if (linhaThis.Linha == linhaOutra.Linha)
                         {
-                            listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
+                            if(linhaThis.Valor + linhaOutra.Valor != 0)
+                                listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
                             linhaThis = linhaThis.Abaixo;
                             linhaOutra = linhaOutra.Abaixo;
                         }
@@ -271,7 +291,7 @@ public class ListaCircular
                         }
 
                     }
-                    else if(linhaThis != null)
+                    else if(linhaThis != linhaCabecaThis)
                     {
                         listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
                         linhaThis = linhaThis.Abaixo;
@@ -287,8 +307,9 @@ public class ListaCircular
             }
             else if(colunaThis != cabeca)
             {
+                Celula linhaCabeca = colunaThis;
                 Celula linha = colunaThis.Abaixo;
-                while (linha != null)
+                while (linha != linhaCabeca)
                 {
                     listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
                     linha = linha.Abaixo;
@@ -297,8 +318,9 @@ public class ListaCircular
             }
             else
             {
+                Celula linhaCabeca = colunaThis;
                 Celula linha = colunaOutra.Abaixo;
-                while (linha != null)
+                while (linha != linhaCabeca)
                 {
                     listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
                     linha = linha.Abaixo;
@@ -309,7 +331,7 @@ public class ListaCircular
         return listaSoma;
     }
 
-    public ListaCircular MultiplicarMatrizes(ListaCircular outra)
+    public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
     {
         int qtasLinhasNova = 0, qtasColunasNova;
 
@@ -323,15 +345,17 @@ public class ListaCircular
         else
             qtasColunasNova = outra.qtasColunas;
 
-        ListaCircular listaMultiplicada = new ListaCircular(qtasLinhasNova, qtasColunasNova);
+        ListaCruzada listaMultiplicada = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
 
         Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
 
         while (colunaThis != cabeca && colunaOutra != outra.cabeca)
         {
-            Celula linhaThis = colunaThis.Abaixo;
-            Celula linhaOutra = colunaOutra.Abaixo;
-            while (linhaThis != null && linhaOutra != null)
+            Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
+
+            Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
+
+            while (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
             {
                 if (linhaThis.Linha == linhaOutra.Linha)
                 {
@@ -354,6 +378,29 @@ public class ListaCircular
         }
         
         return listaMultiplicada;
+    }
+
+    public void Gravar(StreamWriter arq)
+    {
+        Celula atual = cabeca.Direita;
+        int coluna = 1;
+        while (atual != cabeca)
+        {
+            int linha = 0;
+            Celula linhaCelula = atual.Abaixo;
+            while (linha != qtasLinhas)
+            {
+                linha++;
+                if (linhaCelula.Linha == linha)
+                    arq.WriteLine(linhaCelula.ParaArquivo());
+                else
+                    arq.WriteLine((new Celula(null, null, linha, coluna, 0)).ParaArquivo());
+                linhaCelula = linhaCelula.Abaixo;
+            }
+            coluna++;
+            atual = atual.Direita;
+        }
+        arq.Close();
     }
 }
 

@@ -56,6 +56,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvResultado = new System.Windows.Forms.DataGridView();
+            this.btnSalvar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).BeginInit();
@@ -288,6 +289,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnSalvar);
             this.groupBox3.Controls.Add(this.btnExibirMatrizUm);
             this.groupBox3.Controls.Add(this.btnLerMatrizUm);
             this.groupBox3.Controls.Add(this.btnLimpar);
@@ -401,6 +403,17 @@
             this.dgvResultado.Size = new System.Drawing.Size(706, 394);
             this.dgvResultado.TabIndex = 0;
             // 
+            // btnSalvar
+            // 
+            this.btnSalvar.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSalvar.Location = new System.Drawing.Point(6, 196);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(121, 37);
+            this.btnSalvar.TabIndex = 30;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
             // Matrizes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,6 +471,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvResultado;
+        private System.Windows.Forms.Button btnSalvar;
     }
 }
 
