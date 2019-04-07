@@ -47,16 +47,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLerMatrizDois = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.btnExibirMatrizUm = new System.Windows.Forms.Button();
             this.btnLerMatrizUm = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnExibirMatrizDois = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tbMatrizes = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabResultados = new System.Windows.Forms.TabPage();
             this.dgvResultado = new System.Windows.Forms.DataGridView();
-            this.btnSalvar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).BeginInit();
@@ -65,9 +65,9 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tbMatrizes.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -302,6 +302,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Matriz Principal";
             // 
+            // btnSalvar
+            // 
+            this.btnSalvar.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSalvar.Location = new System.Drawing.Point(6, 196);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(121, 37);
+            this.btnSalvar.TabIndex = 30;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
             // btnExibirMatrizUm
             // 
             this.btnExibirMatrizUm.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -359,15 +370,15 @@
             this.btnExibirMatrizDois.UseVisualStyleBackColor = true;
             this.btnExibirMatrizDois.Click += new System.EventHandler(this.btnExibirMatrizDois_Click);
             // 
-            // tabControl1
+            // tbMatrizes
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1141, 645);
-            this.tabControl1.TabIndex = 26;
+            this.tbMatrizes.Controls.Add(this.tabPage1);
+            this.tbMatrizes.Controls.Add(this.tabResultados);
+            this.tbMatrizes.Location = new System.Drawing.Point(12, 12);
+            this.tbMatrizes.Name = "tbMatrizes";
+            this.tbMatrizes.SelectedIndex = 0;
+            this.tbMatrizes.Size = new System.Drawing.Size(1141, 645);
+            this.tbMatrizes.TabIndex = 26;
             // 
             // tabPage1
             // 
@@ -384,16 +395,16 @@
             this.tabPage1.Text = "Matrizes";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabResultados
             // 
-            this.tabPage2.Controls.Add(this.dgvResultado);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1133, 619);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Resultados";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabResultados.Controls.Add(this.dgvResultado);
+            this.tabResultados.Location = new System.Drawing.Point(4, 22);
+            this.tabResultados.Name = "tabResultados";
+            this.tabResultados.Padding = new System.Windows.Forms.Padding(3);
+            this.tabResultados.Size = new System.Drawing.Size(1133, 619);
+            this.tabResultados.TabIndex = 1;
+            this.tabResultados.Text = "Resultados";
+            this.tabResultados.UseVisualStyleBackColor = true;
             // 
             // dgvResultado
             // 
@@ -403,23 +414,12 @@
             this.dgvResultado.Size = new System.Drawing.Size(706, 394);
             this.dgvResultado.TabIndex = 0;
             // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.btnSalvar.Location = new System.Drawing.Point(6, 196);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(121, 37);
-            this.btnSalvar.TabIndex = 30;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
-            // 
             // Matrizes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1167, 665);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tbMatrizes);
             this.Name = "Matrizes";
             this.Text = "Matrizes";
             this.Load += new System.EventHandler(this.Matrizes_Load);
@@ -432,10 +432,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tbMatrizes.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabResultados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
             this.ResumeLayout(false);
 
@@ -467,9 +467,9 @@
         private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnExibirMatrizDois;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tbMatrizes;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabResultados;
         private System.Windows.Forms.DataGridView dgvResultado;
         private System.Windows.Forms.Button btnSalvar;
     }
