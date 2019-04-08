@@ -87,15 +87,15 @@ public class ListaCruzada
         //agora procuraremos as células à esquerda e à direita da posição desejada
         while (!achouPosicao)
         {
-            direita = esquerda.Direita;   //começamos da célula cabeça da linha
-            if (direita == cabecaLinha)  // caso a direita seja igual a cabeca, significa que não há nada nessa linha
-                achouPosicao = true;
-            else if (direita.Linha > nova.Linha)
-                achouPosicao = true;
-            else if (direita.Linha == nova.Linha)
+            direita = esquerda.Direita;   // posicionamos a direita 
+            if (direita == cabecaLinha)  
+                achouPosicao = true;    
+            else if (direita.Linha > nova.Linha)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
+                achouPosicao = true;                
+            else if (direita.Linha == nova.Linha)  // caso a atual seja igual a desejada, encontramos a posição
                 achouPosicao = true;
 
-            if (!achouPosicao)
+            if (!achouPosicao)    //caso não encontre a posição, segue para a próxima célula da linha
                 esquerda = esquerda.Direita;
         }
 
