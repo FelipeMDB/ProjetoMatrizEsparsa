@@ -8,20 +8,21 @@ using System.Windows.Forms;
 
 public class ListaCruzada
 {
-    protected Celula cabeca;
+                                    //declaracao dos atributos da classe
+    protected Celula cabeca;       //celulas cabeca são as células que apontão para a primeira posição da lista Ligada                               
     protected int qtasLinhas, qtasColunas;
 
-    public ListaCruzada(int linhas, int colunas)
-    {
-        cabeca = new Celula(null, null, -1, -1, 0);
+    public ListaCruzada(int linhas, int colunas)              // instanciacao da classe
+    {                                                        //parametros: linhas e colunas da matriz
+        cabeca = new Celula(null, null, -1, -1, 0); 
         Celula primeira = cabeca;
         qtasLinhas = linhas;
         qtasColunas = colunas;
 
-        if (qtasLinhas <= 0 || qtasColunas <= 0)
+        if (qtasLinhas <= 0 || qtasColunas <= 0)        //verificamos se o usuario passou os parâmetros corretos
             throw new Exception("quantidade de linhas ou colunas inválida");
 
-        for (int i = 1; i <= qtasColunas; i++)
+        for (int i = 1; i <= qtasColunas; i++)           //criamos as colunas e as celulas cabecas das colunas 
         {
             cabeca.Direita = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Direita;
@@ -30,66 +31,71 @@ public class ListaCruzada
         cabeca.Direita = primeira;
         cabeca = primeira;
 
-        for (int i = 1; i <= qtasLinhas; i++)
+        for (int i = 1; i <= qtasLinhas; i++)        //criamos as linhas e as celulas cabecas das linhas 
         {
             cabeca.Abaixo = new Celula(null, null, 0, -1, 0);
             cabeca = cabeca.Abaixo;
             cabeca.Direita = cabeca;
         }
-        cabeca.Abaixo = primeira;
+        cabeca.Abaixo = primeira;       //posicionamos as cabecas na primeira posicao
         cabeca = primeira;
     }
 
-    public bool ExisteCelula(int linha, int coluna, ref Celula esquerda, ref Celula direita, ref Celula acima, ref Celula abaixo)
+
+    //método booleano que verifica a existencia de uma celula da matriz
+    //parâmetros: linha, coluna 
+    private bool ExisteCelula(int linha, int coluna, ref Celula esquerda, ref Celula direita, ref Celula acima, ref Celula abaixo)
     {
-        bool existe = false;
+        bool existe = false;             
         Celula atual = cabeca;
 
-        Celula nova = new Celula(null, null, linha, coluna, 0);
+        Celula nova = new Celula(null, null, linha, coluna, 0);  //instanciamos uma celula nova que será utilizada para comparacao
 
-        for (int i = 1; i <= coluna; i++)
+        for (int i = 1; i <= coluna; i++)   //posicionamos o atual na coluna desejada
             atual = atual.Direita;
 
         Celula cabecaColuna = atual;
         bool achouPosicao = false;
-        acima = atual;
-        while (!achouPosicao)
+        acima = atual;      //posicionamos 'acima' na coluna desejada
+        while (!achouPosicao)                
         {
-            abaixo = acima.Abaixo;
-            if (abaixo == cabecaColuna)
-                achouPosicao = true;
+            abaixo = acima.Abaixo;        //saimos da cabeca da coluna e vamos para a posicao abaixo
+            if (abaixo == cabecaColuna)  //caso sejam iguais, 'achouPosicao' recebe true  
+                achouPosicao = true;    
 
-            else if (abaixo.Linha > nova.Linha)
-                achouPosicao = true;
+            else if (abaixo.Linha > nova.Linha)  //caso a posicao atual seja maior que a desejada, significa que a desejada se encontra
+                achouPosicao = true;            //antes da atual, mas não existe uma celula nesta posicao
 
-            else if (abaixo.Linha == nova.Linha)
-            {
-                achouPosicao = true;
-                existe = true;
+            else if (abaixo.Linha == nova.Linha) //caso a linha da atual seja igual a da desejada
+            {                                   //retornamos true, pois se ja temos a coluna e encontramos a linha
+                achouPosicao = true;           //significa que estamos na posição requsitada
+                existe = true;                //também retornamos que há uma célula nesta posição 
             }
 
-            if (abaixo != cabecaColuna && !achouPosicao)
-                acima = acima.Abaixo;
+            if (!achouPosicao)  //caso não tenhamos encontrado a posicao desejada e não estejamos na cabeca 
+                acima = acima.Abaixo;                    //da coluna, descemos para a próxima posição
         }
+        //ao final deste método você acha a posicao das celulas que estão acima e abaixo da posição procurada 
 
-        atual = cabeca;
-        for (int i = 1; i <= linha; i++)
+        atual = cabeca;   //voltamos 'atual' para o no cabeca para assim nos posicionar na linha passada como parametro         
+        for (int i = 1; i <= linha; i++) 
             atual = atual.Abaixo;
 
-        Celula cabecaLinha = atual;
-        achouPosicao = false;
+        Celula cabecaLinha = atual;     //uma celula de cabeca de linha é criada e é posicionada na linha passada de parametro
+        achouPosicao = false;          
         esquerda = atual;
+        //agora procuraremos as células à esquerda e à direita da posição desejada
         while (!achouPosicao)
         {
-            direita = esquerda.Direita;
-            if (direita == cabecaLinha)
+            direita = esquerda.Direita;   //começamos da célula cabeça da linha
+            if (direita == cabecaLinha)  // caso a direita seja igual a cabeca, significa que não há nada nessa linha
                 achouPosicao = true;
             else if (direita.Linha > nova.Linha)
                 achouPosicao = true;
             else if (direita.Linha == nova.Linha)
                 achouPosicao = true;
 
-            if (direita != cabecaLinha && !achouPosicao)
+            if (!achouPosicao)
                 esquerda = esquerda.Direita;
         }
 

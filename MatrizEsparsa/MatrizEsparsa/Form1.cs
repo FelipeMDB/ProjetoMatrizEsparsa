@@ -33,8 +33,15 @@ namespace MatrizEsparsa
 
         private void btnSomarK_Click(object sender, EventArgs e)  //soma a uma coluna da matriz, o valor de uma constante K
         {
-            matriz1.SomarConstanteK(Convert.ToInt32(nColuna.Value),double.Parse(txtValor.Text));//parãmetros: a coluna e a constante
-            Listar(matriz1, dgvMatrizUm);        //listamos o resultado da soma
+            double numero;
+            if (!double.TryParse(txtValor.Text, out numero))    //verificamos se a pessoa digitou um número, caso não tenha,
+                MessageBox.Show("Você deve digitar um número"); //o método não será realizado e diremos a ela que ela deve inserir um valor numérico
+            else
+            {
+                matriz1.SomarConstanteK(Convert.ToInt32(nColuna.Value), numero);//parãmetros: a coluna e a constante
+                Listar(matriz1,dgvMatrizUm);
+            }
+
         }
 
         public void FazerLeitura(ref ListaCruzada matrizM)
@@ -81,7 +88,7 @@ namespace MatrizEsparsa
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
         {
             matriz1.Listar(dgvMatrizUm);
-            dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value)-1].Cells[Convert.ToInt32(nColuna.Value)-1].Style.BackColor = Color.Red;
+            dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value)-1].Cells[Convert.ToInt32(nColuna.Value)-1].Style.BackColor = Color.Yellow;
             MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
         }
 
@@ -140,9 +147,9 @@ namespace MatrizEsparsa
             matriz1.Gravar(new StreamWriter(arquivoMatriz1)); //chama o método gravar para salvar a matriz em um arquivo txt
         }
 
-        private void dgvMatrizUm_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!exibindo)
+        private void dgvMatrizUm_CellValueChanged(object sender, DataGridViewCellEventArgs e)  //método para caso o usuário mude o valor da célula no prórpio grid view 
+        {                                                                                     //o valor também seja alterado na matriz
+            if (!exibindo)                    
             {
                 int coluna = e.ColumnIndex + 1;
                 int linha = e.RowIndex + 1;
@@ -158,7 +165,7 @@ namespace MatrizEsparsa
                 else
                     MessageBox.Show("Digite um valor válido");
 
-                Listar(matriz1, dgvMatrizUm);
+                Listar(matriz1, dgvMatrizUm);                //lista a matriz
             }
 
         }

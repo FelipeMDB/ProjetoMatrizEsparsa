@@ -56,8 +56,8 @@
             this.tbMatrizes = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabResultados = new System.Windows.Forms.TabPage();
-            this.dgvResultado = new System.Windows.Forms.DataGridView();
             this.lblResultados = new System.Windows.Forms.Label();
+            this.dgvResultado = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).BeginInit();
@@ -74,6 +74,7 @@
             // 
             // dgvMatrizUm
             // 
+            this.dgvMatrizUm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizUm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizUm.Location = new System.Drawing.Point(139, 23);
             this.dgvMatrizUm.Name = "dgvMatrizUm";
@@ -409,14 +410,6 @@
             this.tabResultados.Text = "Resultados";
             this.tabResultados.UseVisualStyleBackColor = true;
             // 
-            // dgvResultado
-            // 
-            this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultado.Location = new System.Drawing.Point(191, 80);
-            this.dgvResultado.Name = "dgvResultado";
-            this.dgvResultado.Size = new System.Drawing.Size(706, 394);
-            this.dgvResultado.TabIndex = 0;
-            // 
             // lblResultados
             // 
             this.lblResultados.AutoSize = true;
@@ -427,6 +420,14 @@
             this.lblResultados.TabIndex = 1;
             this.lblResultados.Text = "label2";
             this.lblResultados.Visible = false;
+            // 
+            // dgvResultado
+            // 
+            this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultado.Location = new System.Drawing.Point(191, 80);
+            this.dgvResultado.Name = "dgvResultado";
+            this.dgvResultado.Size = new System.Drawing.Size(706, 394);
+            this.dgvResultado.TabIndex = 0;
             // 
             // Matrizes
             // 
