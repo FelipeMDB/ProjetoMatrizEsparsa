@@ -57,6 +57,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabResultados = new System.Windows.Forms.TabPage();
             this.dgvResultado = new System.Windows.Forms.DataGridView();
+            this.lblResultados = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizUm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizDois)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLinha)).BeginInit();
@@ -398,6 +399,7 @@
             // 
             // tabResultados
             // 
+            this.tabResultados.Controls.Add(this.lblResultados);
             this.tabResultados.Controls.Add(this.dgvResultado);
             this.tabResultados.Location = new System.Drawing.Point(4, 22);
             this.tabResultados.Name = "tabResultados";
@@ -414,6 +416,17 @@
             this.dgvResultado.Name = "dgvResultado";
             this.dgvResultado.Size = new System.Drawing.Size(706, 394);
             this.dgvResultado.TabIndex = 0;
+            // 
+            // lblResultados
+            // 
+            this.lblResultados.AutoSize = true;
+            this.lblResultados.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultados.Location = new System.Drawing.Point(188, 40);
+            this.lblResultados.Name = "lblResultados";
+            this.lblResultados.Size = new System.Drawing.Size(70, 25);
+            this.lblResultados.TabIndex = 1;
+            this.lblResultados.Text = "label2";
+            this.lblResultados.Visible = false;
             // 
             // Matrizes
             // 
@@ -437,6 +450,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabResultados.ResumeLayout(false);
+            this.tabResultados.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
             this.ResumeLayout(false);
 
@@ -473,6 +487,7 @@
         private System.Windows.Forms.TabPage tabResultados;
         private System.Windows.Forms.DataGridView dgvResultado;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.Label lblResultados;
     }
 }
 

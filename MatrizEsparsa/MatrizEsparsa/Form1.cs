@@ -80,6 +80,8 @@ namespace MatrizEsparsa
 
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
         {
+            matriz1.Listar(dgvMatrizUm);
+            dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value)-1].Cells[Convert.ToInt32(nColuna.Value)-1].Style.BackColor = Color.Red;
             MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
         }
 
@@ -106,7 +108,9 @@ namespace MatrizEsparsa
         private void btnSomarMatrizes_Click(object sender, EventArgs e)   //chama método que Soma duas matrizes 
         {
             ListaCruzada resultado = matriz1.SomarMatrizes(matriz2);      //criamos uma terceira matriz que é a soma das duas já existentes
-            Listar(resultado, dgvResultado);                                //listamos a matriz
+            Listar(resultado, dgvResultado);                             //listamos a matriz
+            lblResultados.Visible = true;
+            lblResultados.Text = "Resultado da soma:";
             tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
         }
 
@@ -120,6 +124,8 @@ namespace MatrizEsparsa
         {
             ListaCruzada resultado = matriz1.MultiplicarMatrizes(matriz2);
             Listar(resultado, dgvResultado);                                //listamos a matriz
+            lblResultados.Visible = true;
+            lblResultados.Text = "Resultado da Multiplicação:";
             tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
         }
 
