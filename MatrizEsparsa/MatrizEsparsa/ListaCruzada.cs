@@ -332,6 +332,44 @@ public class ListaCruzada
     {
         ListaCruzada matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
 
+        Celula cabecaLinha = cabeca.Abaixo;
+
+        int linha = 1;
+        int coluna = 1;
+        while(cabecaLinha != cabeca)
+        {
+            Celula cabecaColuna = outra.cabeca.Direita;
+            while(cabecaColuna != outra.cabeca)
+            {
+                Celula atualColuna = cabecaColuna.Abaixo;
+                Celula atualLinha = cabecaLinha.Direita;
+                
+                double resultado = 0;
+                while (atualColuna != cabecaColuna)
+                {
+                    if (atualLinha != cabecaLinha && atualLinha.Coluna == atualColuna.Linha)
+                    {
+                        resultado += atualLinha.Valor * atualColuna.Valor;
+                    }
+
+                    else if (atualLinha.Coluna > atualColuna.Linha)
+                        atualColuna = atualColuna.Abaixo;
+
+                    else
+                        atualLinha = atualLinha.Direita;
+                }
+
+                matrizMultiplicada.AdicionarCelula(linha, coluna, resultado);
+
+                cabecaColuna = cabecaColuna.Direita;
+                coluna++;
+            }
+
+            cabecaLinha = cabecaLinha.Abaixo;
+            linha++;
+        }
+
+        return matrizMultiplicada;
     }
 
     public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
