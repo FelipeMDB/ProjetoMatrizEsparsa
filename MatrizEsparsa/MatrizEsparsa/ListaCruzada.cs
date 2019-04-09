@@ -24,21 +24,20 @@ public class ListaCruzada
 
         for (int i = 1; i <= qtasColunas; i++)           //criamos as colunas e as celulas cabecas das colunas 
         {
-            cabeca.Direita = new Celula(null, null, 0, -1, 0);
-            cabeca = cabeca.Direita;
-            cabeca.Abaixo = cabeca;
+            primeira.Direita = new Celula(null, null, 0, -1, 0);
+            primeira = primeira.Direita;
+            primeira.Abaixo = primeira;
         }
-        cabeca.Direita = primeira;
-        cabeca = primeira;
+        primeira.Direita = cabeca;
+        primeira = cabeca;
 
         for (int i = 1; i <= qtasLinhas; i++)        //criamos as linhas e as celulas cabecas das linhas 
         {
-            cabeca.Abaixo = new Celula(null, null, 0, -1, 0);
-            cabeca = cabeca.Abaixo;
-            cabeca.Direita = cabeca;
+            primeira.Abaixo = new Celula(null, null, 0, -1, 0);
+            primeira = primeira.Abaixo;
+            primeira.Direita = primeira;
         }
-        cabeca.Abaixo = primeira;       //posicionamos as cabecas na primeira posicao
-        cabeca = primeira;
+        primeira.Abaixo = cabeca;       //posicionamos as cabecas na primeira posicao
     }
 
 
@@ -48,8 +47,6 @@ public class ListaCruzada
     {
         bool existe = false;             
         Celula atual = cabeca;
-
-        Celula nova = new Celula(null, null, linha, coluna, 0);  //instanciamos uma celula nova que será utilizada para comparacao
 
         for (int i = 1; i <= coluna; i++)   //posicionamos o atual na coluna desejada
             atual = atual.Direita;
@@ -63,10 +60,10 @@ public class ListaCruzada
             if (abaixo == cabecaColuna)  //caso sejam iguais, 'achouPosicao' recebe true  
                 achouPosicao = true;    
 
-            else if (abaixo.Linha > nova.Linha)  //caso a posicao atual seja maior que a desejada, significa que a desejada se encontra
+            else if (abaixo.Linha > linha)  //caso a posicao atual seja maior que a desejada, significa que a desejada se encontra
                 achouPosicao = true;            //antes da atual, mas não existe uma celula nesta posicao
 
-            else if (abaixo.Linha == nova.Linha) //caso a linha da atual seja igual a da desejada
+            else if (abaixo.Linha == linha) //caso a linha da atual seja igual a da desejada
             {                                   //retornamos true, pois se ja temos a coluna e encontramos a linha
                 achouPosicao = true;           //significa que estamos na posição requsitada
                 existe = true;                //também retornamos que há uma célula nesta posição 
@@ -90,9 +87,9 @@ public class ListaCruzada
             direita = esquerda.Direita;   // posicionamos a direita 
             if (direita == cabecaLinha)  
                 achouPosicao = true;    
-            else if (direita.Linha > nova.Linha)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
+            else if (direita.Linha > linha)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
                 achouPosicao = true;                
-            else if (direita.Linha == nova.Linha)  // caso a atual seja igual a desejada, encontramos a posição
+            else if (direita.Linha == linha)  // caso a atual seja igual a desejada, encontramos a posição
                 achouPosicao = true;
 
             if (!achouPosicao)    //caso não encontre a posição, segue para a próxima célula da linha
@@ -132,11 +129,13 @@ public class ListaCruzada
         for (int c = 0; c < qtasColunas; c++)
         {
             coluna = coluna.Direita;
+
+            Celula cabecaLinha = coluna;
             Celula linha = coluna;
 
             for (int l = 0; l < qtasLinhas; l++)
             {
-                if (linha.Abaixo != null && linha.Abaixo.Linha.CompareTo(l + 1) == 0)
+                if (linha.Abaixo != cabecaLinha && linha.Abaixo.Linha.CompareTo(l + 1) == 0)
                 {
                     linha = linha.Abaixo;
                     dgv.Rows[l].Cells[c].Value = linha.Valor;
@@ -147,7 +146,7 @@ public class ListaCruzada
         }
     }
 
-    public double Buscar(int linha, int coluna)
+    public double? Buscar(int linha, int coluna)
     {
         if (linha <= qtasLinhas && linha > 0 && coluna <= qtasColunas && coluna > 0)
         {
@@ -159,7 +158,7 @@ public class ListaCruzada
             }
             return 0;
         }
-        return default(double);
+        return null;
     }
 
     public void Inserir(int linha, int coluna, double valor)
@@ -250,91 +249,89 @@ public class ListaCruzada
 
     public ListaCruzada SomarMatrizes(ListaCruzada outra)
     {
-        int qtasLinhasNova = 0, qtasColunasNova;
-
-        if (qtasLinhas > outra.qtasLinhas)
-            qtasLinhasNova = qtasLinhas;
-        else
-            qtasLinhasNova = outra.qtasLinhas;
-
-        if (qtasColunas > outra.qtasColunas)
-            qtasColunasNova = qtasColunas;
-        else
-            qtasColunasNova = outra.qtasColunas;
-            
-        ListaCruzada listaSoma = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
-        
-        Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
-
-        while (colunaThis != cabeca || colunaOutra != outra.cabeca)
+        if (qtasLinhas == outra.qtasLinhas && qtasColunas == outra.qtasColunas)
         {
-            if(colunaThis != cabeca && colunaOutra != outra.cabeca)
+            ListaCruzada matrizSoma = new ListaCruzada(qtasLinhas, qtasColunas);
+
+            Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
+
+            while (colunaThis != cabeca || colunaOutra != outra.cabeca)
             {
-                Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
-
-                Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
-
-                while(linhaThis != linhaCabecaThis || linhaOutra != linhaCabecaOutra)
+                if (colunaThis != cabeca && colunaOutra != outra.cabeca)
                 {
-                    if(linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
+                    Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
+
+                    Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
+
+                    while (linhaThis != linhaCabecaThis || linhaOutra != linhaCabecaOutra)
                     {
-                        if (linhaThis.Linha == linhaOutra.Linha)
+                        if (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
                         {
-                            if(linhaThis.Valor + linhaOutra.Valor != 0)
-                                listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
-                            linhaThis = linhaThis.Abaixo;
-                            linhaOutra = linhaOutra.Abaixo;
+                            if (linhaThis.Linha == linhaOutra.Linha)
+                            {
+                                if (linhaThis.Valor + linhaOutra.Valor != 0)
+                                    matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
+                                linhaThis = linhaThis.Abaixo;
+                                linhaOutra = linhaOutra.Abaixo;
+                            }
+                            else if (linhaThis.Linha < linhaOutra.Linha)
+                            {
+                                matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
+                                linhaThis = linhaThis.Abaixo;
+                            }
+                            else
+                            {
+                                matrizSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
+                                linhaOutra = linhaOutra.Abaixo;
+                            }
+
                         }
-                        else if(linhaThis.Linha<linhaOutra.Linha)
+                        else if (linhaThis != linhaCabecaThis)
                         {
-                            listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
+                            matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
                             linhaThis = linhaThis.Abaixo;
                         }
                         else
                         {
-                            listaSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
+                            matrizSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
                             linhaOutra = linhaOutra.Abaixo;
                         }
-
                     }
-                    else if(linhaThis != linhaCabecaThis)
-                    {
-                        listaSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
-                        linhaThis = linhaThis.Abaixo;
-                    }
-                    else
-                    {
-                        listaSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
-                        linhaOutra = linhaOutra.Abaixo;
-                    }
+                    colunaThis = colunaThis.Direita;
+                    colunaOutra = colunaOutra.Direita;
                 }
-                colunaThis = colunaThis.Direita;
-                colunaOutra = colunaOutra.Direita;
-            }
-            else if(colunaThis != cabeca)
-            {
-                Celula linhaCabeca = colunaThis;
-                Celula linha = colunaThis.Abaixo;
-                while (linha != linhaCabeca)
+                else if (colunaThis != cabeca)
                 {
-                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
-                    linha = linha.Abaixo;
+                    Celula linhaCabeca = colunaThis;
+                    Celula linha = colunaThis.Abaixo;
+                    while (linha != linhaCabeca)
+                    {
+                        matrizSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                        linha = linha.Abaixo;
+                    }
+                    colunaThis = colunaThis.Direita;
                 }
-                colunaThis = colunaThis.Direita;
-            }
-            else
-            {
-                Celula linhaCabeca = colunaThis;
-                Celula linha = colunaOutra.Abaixo;
-                while (linha != linhaCabeca)
+                else
                 {
-                    listaSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
-                    linha = linha.Abaixo;
+                    Celula linhaCabeca = colunaThis;
+                    Celula linha = colunaOutra.Abaixo;
+                    while (linha != linhaCabeca)
+                    {
+                        matrizSoma.Inserir(linha.Linha, linha.Coluna, linha.Valor);
+                        linha = linha.Abaixo;
+                    }
+                    colunaOutra = colunaOutra.Direita;
                 }
-                colunaOutra = colunaOutra.Direita;
             }
+            return matrizSoma;
         }
-        return listaSoma;
+        return null;
+    }
+
+    public ListaCruzada MultiplicarMatrizes(ListaCruzada outra, String triste)
+    {
+        ListaCruzada matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
+
     }
 
     public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)

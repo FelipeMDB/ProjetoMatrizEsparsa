@@ -87,9 +87,15 @@ namespace MatrizEsparsa
 
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
         {
-            matriz1.Listar(dgvMatrizUm);
-            dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value)-1].Cells[Convert.ToInt32(nColuna.Value)-1].Style.BackColor = Color.Yellow;
-            MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))}");
+            double? buscado = matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
+            if (buscado != null)
+            {
+                matriz1.Listar(dgvMatrizUm);
+                dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Style.BackColor = Color.Yellow;
+                MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {buscado}");
+            }
+            else
+                MessageBox.Show("Digite uma linha e coluna dentro dos limites da matriz");
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)  //chama o método que libera todas as posições armazenadas de uma matriz c
@@ -115,10 +121,15 @@ namespace MatrizEsparsa
         private void btnSomarMatrizes_Click(object sender, EventArgs e)   //chama método que Soma duas matrizes 
         {
             ListaCruzada resultado = matriz1.SomarMatrizes(matriz2);      //criamos uma terceira matriz que é a soma das duas já existentes
-            Listar(resultado, dgvResultado);                             //listamos a matriz
-            lblResultados.Visible = true;
-            lblResultados.Text = "Resultado da soma:";
-            tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
+            if (resultado != null)
+            {
+                Listar(resultado, dgvResultado);                             //listamos a matriz
+                lblResultados.Visible = true;
+                lblResultados.Text = "Resultado da soma:";
+                tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
+            }
+            else
+                MessageBox.Show("As matrizes devem ser de mesmo tamanho para a soma");
         }
 
         private void btnRemover_Click(object sender, EventArgs e)           //chamamos o método remover que remove o valor de uma célula
