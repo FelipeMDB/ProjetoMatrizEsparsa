@@ -113,8 +113,11 @@ namespace MatrizEsparsa
                 MessageBox.Show("Você deve digitar um número"); //o método não será realizado e diremos a ela que ela deve inserir um valor numérico
             else
             {
-                matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
-                Listar(matriz1, dgvMatrizUm);  //lista a matriz com o novo valor
+                if (matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero))
+                    dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Value = numero;
+                else
+                    MessageBox.Show("Já existe um valor nesta posição ou valor de linha e coluna fora dos limites da matriz");
+
             }
         }
 
@@ -134,8 +137,10 @@ namespace MatrizEsparsa
 
         private void btnRemover_Click(object sender, EventArgs e)           //chamamos o método remover que remove o valor de uma célula
         {
-            matriz1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value)); //parâmetros : coluna e linha do valor a ser removido
-            Listar(matriz1, dgvMatrizUm);        //listamos a matriz agora sem o valor removido
+            if (matriz1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))) //parâmetros : coluna e linha do valor a ser removido (retorna true se removeu ou se já não existia)
+                dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Value = 0;
+            else
+                MessageBox.Show("Digite um valor nos limites da matriz para excluir"); // método remover retorna false se o valor fornecido não era válido
         }           
 
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)

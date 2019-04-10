@@ -161,7 +161,7 @@ public class ListaCruzada
         return null;
     }
 
-    public void Inserir(int linha, int coluna, double valor)
+    public bool Inserir(int linha, int coluna, double valor)
     {
         if (linha <= qtasLinhas && coluna <= qtasColunas)
         {
@@ -175,19 +175,16 @@ public class ListaCruzada
                 nova.Direita = direita;
                 acima.Abaixo = nova;
                 nova.Abaixo = abaixo;
+                return true;
             }
             else
-            {
-                MessageBox.Show("Já existe um valor nesta posição da matriz");
-            }
+                return false;
         }
         else
-        {
-            MessageBox.Show("Digite um valor nos limites da matriz");
-        }
+            return false;
     }
 
-    public void Remover(int linha, int coluna)
+    public bool Remover(int linha, int coluna)
     {
         if (linha <= qtasLinhas && coluna <= qtasColunas)
         {
@@ -199,11 +196,10 @@ public class ListaCruzada
                 esquerda.Direita = direita.Direita;
                 acima.Abaixo = abaixo.Abaixo;
             }
+            return true;
         }
         else
-        {
-            MessageBox.Show("Digite um valor nos limites da matriz");
-        }
+            return false;
     }
 
     public void LimparMatriz()
