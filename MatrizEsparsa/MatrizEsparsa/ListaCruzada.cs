@@ -87,9 +87,9 @@ public class ListaCruzada
             direita = esquerda.Direita;   // posicionamos a direita 
             if (direita == cabecaLinha)  
                 achouPosicao = true;    
-            else if (direita.Linha > linha)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
+            else if (direita.Coluna > coluna)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
                 achouPosicao = true;                
-            else if (direita.Linha == linha)  // caso a atual seja igual a desejada, encontramos a posição
+            else if (direita.Coluna == coluna)  // caso a atual seja igual a desejada, encontramos a posição
                 achouPosicao = true;
 
             if (!achouPosicao)    //caso não encontre a posição, segue para a próxima célula da linha
@@ -331,7 +331,7 @@ public class ListaCruzada
                     else if (atualLinha.Coluna > atualColuna.Linha)
                         atualColuna = atualColuna.Abaixo;
 
-                    else
+                    else if(atualLinha != cabecaThis)
                         atualLinha = atualLinha.Direita;
                 }
 
