@@ -99,24 +99,6 @@ public class ListaCruzada
         return existe;
     }
 
-    public void AdicionarCelula(int linha, int coluna, double valor)
-    {
-        if (valor != 0)
-        {
-            Celula acima = null, abaixo = null, direita = null, esquerda = null;
-
-            Celula nova = new Celula(null, null, linha, coluna, valor);
-
-            if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
-            {
-                esquerda.Direita = nova;
-                nova.Direita = direita;
-                acima.Abaixo = nova;
-                nova.Abaixo = abaixo;
-            }
-        }
-    }
-
     public void Listar(DataGridView dgv)
     {
         dgv.Columns.Clear();
@@ -163,14 +145,13 @@ public class ListaCruzada
 
     public bool Inserir(int linha, int coluna, double valor)
     {
-        if (linha <= qtasLinhas && coluna <= qtasColunas)
+        if (linha <= qtasLinhas && coluna <= qtasColunas && valor != 0)
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-            Celula nova = new Celula(null, null, linha, coluna, valor);
-
             if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
             {
+                Celula nova = new Celula(null, null, linha, coluna, valor);
                 esquerda.Direita = nova;
                 nova.Direita = direita;
                 acima.Abaixo = nova;
