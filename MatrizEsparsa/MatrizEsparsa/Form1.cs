@@ -58,7 +58,7 @@ namespace MatrizEsparsa
                 while (!arquivo.EndOfStream) //o arquivo será lido completamente e criaremos as células passadas pelo arquivo
                 {
                     Celula lido = Celula.LerRegistro(arquivo);
-                    matrizM.AdicionarCelula(lido.Linha, lido.Coluna, lido.Valor);
+                    matrizM.Inserir(lido.Linha, lido.Coluna, lido.Valor);
                 }
                 
                 arquivo.Close();
@@ -85,14 +85,23 @@ namespace MatrizEsparsa
             Listar(matriz1, dgvMatrizUm);       //chama o método listar que lista a matriz em um dataGridView
         }
 
+
+        int coluna = 0; //variáveis para salvar a célula anterior e dessa forma voltá-la para sua cor padrão sem precisar listar novamente a matriz
+        int linha = 0;
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
         {
+            
+
             double? buscado = matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
             if (buscado != null)
             {
-                matriz1.Listar(dgvMatrizUm);
-                dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Style.BackColor = Color.Yellow;
+                
+                dgvMatrizUm.Rows[linha].Cells[coluna].Style.BackColor = Color.White;  //a celula que foi buscada anteriormente volta à cor original
+                dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Style.BackColor = Color.Yellow;//mudamos a cor para chamar a atenção do usuário
                 MessageBox.Show($"Valor da posição ({nLinha.Value}, {nColuna.Value}): {buscado}");
+
+                linha = Convert.ToInt32(nLinha.Value) - 1;  
+                coluna = Convert.ToInt32(nColuna.Value) - 1;
             }
             else
                 MessageBox.Show("Digite uma linha e coluna dentro dos limites da matriz");
