@@ -131,6 +131,7 @@
             // 
             // dgvMatrizDois
             // 
+            this.dgvMatrizDois.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizDois.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizDois.Location = new System.Drawing.Point(25, 23);
             this.dgvMatrizDois.Name = "dgvMatrizDois";

@@ -328,7 +328,7 @@ public class ListaCruzada
         return null;
     }
 
-    public ListaCruzada MultiplicarMatrizes(ListaCruzada outra, String triste)
+    public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
     {
         ListaCruzada matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
 
@@ -345,7 +345,7 @@ public class ListaCruzada
                 Celula atualLinha = cabecaLinha.Direita;
                 
                 double resultado = 0;
-                while (atualColuna != cabecaColuna)
+                while (atualColuna != cabecaColuna && atualLinha != cabecaLinha)
                 {
                     if (atualLinha != cabecaLinha && atualLinha.Coluna == atualColuna.Linha)
                     {
@@ -372,54 +372,54 @@ public class ListaCruzada
         return matrizMultiplicada;
     }
 
-    public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
-    {
-        int qtasLinhasNova = 0, qtasColunasNova;
+    //public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
+    //{
+    //    int qtasLinhasNova = 0, qtasColunasNova;
 
-        if (qtasLinhas < outra.qtasLinhas)
-            qtasLinhasNova = qtasLinhas;
-        else
-            qtasLinhasNova = outra.qtasLinhas;
+    //    if (qtasLinhas < outra.qtasLinhas)
+    //        qtasLinhasNova = qtasLinhas;
+    //    else
+    //        qtasLinhasNova = outra.qtasLinhas;
 
-        if (qtasColunas < outra.qtasColunas)
-            qtasColunasNova = qtasColunas;
-        else
-            qtasColunasNova = outra.qtasColunas;
+    //    if (qtasColunas < outra.qtasColunas)
+    //        qtasColunasNova = qtasColunas;
+    //    else
+    //        qtasColunasNova = outra.qtasColunas;
 
-        ListaCruzada listaMultiplicada = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
+    //    ListaCruzada listaMultiplicada = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
 
-        Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
+    //    Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
 
-        while (colunaThis != cabeca && colunaOutra != outra.cabeca)
-        {
-            Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
+    //    while (colunaThis != cabeca && colunaOutra != outra.cabeca)
+    //    {
+    //        Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
 
-            Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
+    //        Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
 
-            while (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
-            {
-                if (linhaThis.Linha == linhaOutra.Linha)
-                {
-                    listaMultiplicada.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
-                    linhaThis = linhaThis.Abaixo;
-                    linhaOutra = linhaOutra.Abaixo;
-                }
-                else if (linhaThis.Linha < linhaOutra.Linha)
-                {
-                    linhaThis = linhaThis.Abaixo;
-                }
-                else
-                {
-                    linhaOutra = linhaOutra.Abaixo;
-                }
-            }
+    //        while (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
+    //        {
+    //            if (linhaThis.Linha == linhaOutra.Linha)
+    //            {
+    //                listaMultiplicada.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
+    //                linhaThis = linhaThis.Abaixo;
+    //                linhaOutra = linhaOutra.Abaixo;
+    //            }
+    //            else if (linhaThis.Linha < linhaOutra.Linha)
+    //            {
+    //                linhaThis = linhaThis.Abaixo;
+    //            }
+    //            else
+    //            {
+    //                linhaOutra = linhaOutra.Abaixo;
+    //            }
+    //        }
                 
-            colunaThis = colunaThis.Direita;
-            colunaOutra = colunaOutra.Direita;
-        }
+    //        colunaThis = colunaThis.Direita;
+    //        colunaOutra = colunaOutra.Direita;
+    //    }
         
-        return listaMultiplicada;
-    }
+    //    return listaMultiplicada;
+    //}
 
     public void Gravar(StreamWriter arq)
     {
