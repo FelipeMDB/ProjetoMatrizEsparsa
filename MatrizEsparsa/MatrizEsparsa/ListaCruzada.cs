@@ -171,7 +171,6 @@ public class ListaCruzada
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-
             if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
             {
                 esquerda.Direita = direita.Direita;
@@ -309,22 +308,22 @@ public class ListaCruzada
     {
         ListaCruzada matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
 
-        Celula cabecaLinha = cabeca.Abaixo;
+        Celula cabecaThis = cabeca.Abaixo;
 
         int linha = 1;
         int coluna = 1;
-        while(cabecaLinha != cabeca)
+        while(cabecaThis != cabeca)
         {
             Celula cabecaColuna = outra.cabeca.Direita;
             while(cabecaColuna != outra.cabeca)
             {
                 Celula atualColuna = cabecaColuna.Abaixo;
-                Celula atualLinha = cabecaLinha.Direita;
+                Celula atualLinha = cabecaThis.Direita;
                 
                 double resultado = 0;
-                while (atualColuna != cabecaColuna && atualLinha != cabecaLinha)
+                while (atualColuna != cabecaColuna && atualLinha != cabecaThis)
                 {
-                    if (atualLinha != cabecaLinha && atualLinha.Coluna == atualColuna.Linha)
+                    if (atualLinha != cabecaThis && atualLinha.Coluna == atualColuna.Linha)
                     {
                         resultado += atualLinha.Valor * atualColuna.Valor;
                     }
@@ -336,13 +335,13 @@ public class ListaCruzada
                         atualLinha = atualLinha.Direita;
                 }
 
-                matrizMultiplicada.AdicionarCelula(linha, coluna, resultado);
+                matrizMultiplicada.Inserir(linha, coluna, resultado);
 
                 cabecaColuna = cabecaColuna.Direita;
                 coluna++;
             }
 
-            cabecaLinha = cabecaLinha.Abaixo;
+            cabecaThis = cabecaThis.Abaixo;
             linha++;
         }
 
@@ -405,16 +404,21 @@ public class ListaCruzada
         int coluna = 1;
         while (atual != cabeca)
         {
-            int linha = 0;
+            int linha = 1;
             Celula linhaCelula = atual.Abaixo;
-            while (linha != qtasLinhas)
+            Celula cabecaLinha = atual;
+            while (linha <= qtasLinhas)
             {
-                linha++;
-                if (linhaCelula.Linha == linha)
+                if (linhaCelula != cabecaLinha && linhaCelula.Linha == linha)
+                {
                     arq.WriteLine(linhaCelula.ParaArquivo());
+                    linhaCelula = linhaCelula.Abaixo;
+                }
                 else
                     arq.WriteLine((new Celula(null, null, linha, coluna, 0)).ParaArquivo());
-                linhaCelula = linhaCelula.Abaixo;
+
+
+                linha++;
             }
             coluna++;
             atual = atual.Direita;
@@ -422,7 +426,7 @@ public class ListaCruzada
         arq.Close();
     }
 
-    public void Alterar(int linha, int coluna, double valor)
+    public bool Alterar(int linha, int coluna, double valor)
     {
         Celula acima = null, abaixo = null, direita = null, esquerda = null;
         
@@ -432,9 +436,14 @@ public class ListaCruzada
             {
                 esquerda.Direita = direita.Direita;
                 acima.Abaixo = abaixo.Abaixo;
+                return true;
             }
             else
+            {
                 direita.Valor = valor;
+                abaixo.Valor = valor;
+                return true;
+            }
         }
         else
         {
@@ -444,6 +453,8 @@ public class ListaCruzada
             nova.Direita = direita;
             acima.Abaixo = nova;
             nova.Abaixo = abaixo;
+
+            return true;
         }
     }
 }

@@ -74,10 +74,14 @@
             // 
             // dgvMatrizUm
             // 
+            this.dgvMatrizUm.AllowUserToAddRows = false;
+            this.dgvMatrizUm.AllowUserToDeleteRows = false;
             this.dgvMatrizUm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizUm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatrizUm.ColumnHeadersVisible = false;
             this.dgvMatrizUm.Location = new System.Drawing.Point(139, 23);
             this.dgvMatrizUm.Name = "dgvMatrizUm";
+            this.dgvMatrizUm.RowHeadersVisible = false;
             this.dgvMatrizUm.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizUm.TabIndex = 0;
             this.dgvMatrizUm.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatrizUm_CellValueChanged);

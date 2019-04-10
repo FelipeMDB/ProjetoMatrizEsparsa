@@ -31,6 +31,13 @@ namespace MatrizEsparsa
             exibindo = false;
         }
 
+        public void AlterarValor(int linha, int coluna, double valor)
+        {
+            exibindo = true;
+            dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value = valor;
+            exibindo = false;
+        }
+
         private void btnSomarK_Click(object sender, EventArgs e)  //soma a uma coluna da matriz, o valor de uma constante K
         {
             double numero;
@@ -90,8 +97,6 @@ namespace MatrizEsparsa
         int linha = 0;
         private void btnBuscar_Click(object sender, EventArgs e)  //chama o método que busca o valor desejado através da linha e coluna e o exibe em um messageBox 
         {
-            
-
             double? buscado = matriz1.Buscar(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value));
             if (buscado != null)
             {
@@ -113,7 +118,6 @@ namespace MatrizEsparsa
             Listar(matriz1, dgvMatrizUm);    //lista a matriz(neste caso vazia)
         }
 
-
         private void btnInserir_Click(object sender, EventArgs e)//chama o método inserir, que insere um valor com base na linha e coluna desejada
         {
             double numero;
@@ -123,7 +127,7 @@ namespace MatrizEsparsa
             else
             {
                 if (matriz1.Inserir(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero))
-                    dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Value = numero;
+                    AlterarValor(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), numero);
                 else
                     MessageBox.Show("Já existe um valor nesta posição ou valor de linha e coluna fora dos limites da matriz");
 
@@ -147,7 +151,7 @@ namespace MatrizEsparsa
         private void btnRemover_Click(object sender, EventArgs e)           //chamamos o método remover que remove o valor de uma célula
         {
             if (matriz1.Remover(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value))) //parâmetros : coluna e linha do valor a ser removido (retorna true se removeu ou se já não existia)
-                dgvMatrizUm.Rows[Convert.ToInt32(nLinha.Value) - 1].Cells[Convert.ToInt32(nColuna.Value) - 1].Value = 0;
+                AlterarValor(Convert.ToInt32(nLinha.Value), Convert.ToInt32(nColuna.Value), 0);
             else
                 MessageBox.Show("Digite um valor nos limites da matriz para excluir"); // método remover retorna false se o valor fornecido não era válido
         }           
@@ -182,15 +186,11 @@ namespace MatrizEsparsa
 
                 if (dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value != null && double.TryParse(dgvMatrizUm.Rows[linha - 1].Cells[coluna - 1].Value.ToString(), out valor))
                 {
-                    if (valor == 0)
-                        matriz1.Remover(linha, coluna);
-                    else
-                        matriz1.Alterar(linha, coluna, valor);
+                    if (matriz1.Alterar(linha, coluna, valor))
+                        AlterarValor(linha, coluna, valor);
                 }
                 else
-                    MessageBox.Show("Digite um valor válido");
-
-                Listar(matriz1, dgvMatrizUm);                //lista a matriz
+                    MessageBox.Show("Digite um valor válido");       //lista a matriz
             }
 
         }
