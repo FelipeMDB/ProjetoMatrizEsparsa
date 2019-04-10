@@ -115,17 +115,18 @@ public class ListaCruzada
         for (int c = 0; c < qtasColunas; c++) //percorre-se até acabar colunas (poderia usar while(coluna != cabeca) também)
         {
             coluna = coluna.Direita; // percorre para o próximo nó cabeça de coluna
-            
-            Celula linha = coluna.Abaixo; // vai para a primeira linha da coluna
+
+            Celula cabecaLinha = coluna;
+            Celula linha = coluna; // vai para a primeira linha da coluna
 
             for (int l = 0; l < qtasLinhas; l++) //percorre-se até acabar quantidade de linhas
             {
-                if (linha != coluna && linha.Abaixo.Linha.CompareTo(l + 1) == 0) //se a linha não for igual à coluna, ou seja, 
-                                                                                 //ela não ser a cabeca e se a linha da Celula que percorre as 
-                                                                                 //linhas for a linha que se quer
+                if (linha.Abaixo != cabecaLinha && linha.Abaixo.Linha.CompareTo(l + 1) == 0) //se a linha não for igual à coluna, ou seja, 
+                                                                                             //ela não ser a cabeca e se a linha da Celula que percorre as 
+                                                                                             //linhas for a linha que se quer
                 {
-                    dgv.Rows[l].Cells[c].Value = linha.Valor; //adiciona ao grid view o valor da linha
                     linha = linha.Abaixo; //vai para a próxima linha
+                    dgv.Rows[l].Cells[c].Value = linha.Valor; //adiciona ao grid view o valor da linha
                 }
                 else
                     dgv.Rows[l].Cells[c].Value = 0; //se a linha for a cabeca ou não for igual a linha que se quer(l+1), quer dizer 
@@ -211,7 +212,7 @@ public class ListaCruzada
                 atual = atual.Direita;
 
             Celula atualCabeca = atual; //guarda-se a cabeça, pois atual percorrerá para baixo
-            atual = atual.Abaixo; //primeira posição válida da coluna de nó cabeca "cabecaAtual"
+            atual = atual.Abaixo; //primeira posição válida da coluna de nó cabeca "atualCabeca"
 
             int linha = 1;
             while (linha <= qtasLinhas) //enquanto não se percorrer todas as linhas
