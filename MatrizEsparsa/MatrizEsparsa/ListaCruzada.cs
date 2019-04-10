@@ -101,95 +101,102 @@ public class ListaCruzada
 
     public void Listar(DataGridView dgv)
     {
+        //limpa grid view para garantir que está vazio antes de listar
         dgv.Columns.Clear();
-        dgv.Rows.Clear();
+        dgv.Rows.Clear(); 
+        
+        //define quantidade de linhas e colunas do grid de acordo com os valores da matriz
         dgv.RowCount = qtasLinhas;
         dgv.ColumnCount = qtasColunas;
 
+        //Celula que irá percorrer as colunas da matriz
         Celula coluna = cabeca;
 
-        for (int c = 0; c < qtasColunas; c++)
+        for (int c = 0; c < qtasColunas; c++) //percorre-se até acabar colunas (poderia usar while(coluna != cabeca) também)
         {
-            coluna = coluna.Direita;
+            coluna = coluna.Direita; // percorre para o próximo nó cabeça de coluna
+            
+            Celula linha = coluna.Abaixo; // vai para a primeira linha da coluna
 
-            Celula cabecaLinha = coluna;
-            Celula linha = coluna;
-
-            for (int l = 0; l < qtasLinhas; l++)
+            for (int l = 0; l < qtasLinhas; l++) //percorre-se até acabar quantidade de linhas
             {
-                if (linha.Abaixo != cabecaLinha && linha.Abaixo.Linha.CompareTo(l + 1) == 0)
+                if (linha != coluna && linha.Abaixo.Linha.CompareTo(l + 1) == 0) //se a linha não for igual à coluna, ou seja, 
+                                                                                 //ela não ser a cabeca e se a linha da Celula que percorre as 
+                                                                                 //linhas for a linha que se quer
                 {
-                    linha = linha.Abaixo;
-                    dgv.Rows[l].Cells[c].Value = linha.Valor;
+                    dgv.Rows[l].Cells[c].Value = linha.Valor; //adiciona ao grid view o valor da linha
+                    linha = linha.Abaixo; //vai para a próxima linha
                 }
                 else
-                    dgv.Rows[l].Cells[c].Value = 0;
+                    dgv.Rows[l].Cells[c].Value = 0; //se a linha for a cabeca ou não for igual a linha que se quer(l+1), quer dizer 
+                                                    //que esta posição não foi guardada, ou seja, é 0
             }
         }
     }
 
     public double? Buscar(int linha, int coluna)
     {
-        if (linha <= qtasLinhas && linha > 0 && coluna <= qtasColunas && coluna > 0)
+        if (linha <= qtasLinhas && linha > 0 && coluna <= qtasColunas && coluna > 0) //verifica-se se linha e coluna fornecidos estão nos limites da matriz
         {
-            Celula acima = null, abaixo = null, direita = null, esquerda = null;
+            Celula acima = null, abaixo = null, direita = null, esquerda = null; //celulas para método existe
 
-            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo)) //método existe retorna "abaixo" e "direita" como sendo o procurado
             {
                 return abaixo.Valor;
             }
-            return 0;
+            return 0; //se não existir, valor é 0
         }
-        return null;
+        return null; //retorna null se for fora dos limites da matriz
     }
 
-    public bool Inserir(int linha, int coluna, double valor)
+    public bool Inserir(int linha, int coluna, double valor) 
     {
-        if (linha <= qtasLinhas && coluna <= qtasColunas && valor != 0)
+        if (linha <= qtasLinhas && coluna <= qtasColunas && valor != 0) //verifica se está dentro dos limites da matriz e o valor não é 0
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
             if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
             {
-                Celula nova = new Celula(null, null, linha, coluna, valor);
-                esquerda.Direita = nova;
-                nova.Direita = direita;
-                acima.Abaixo = nova;
-                nova.Abaixo = abaixo;
-                return true;
+                Celula nova = new Celula(null, null, linha, coluna, valor); //célula nova que será inserida
+                esquerda.Direita = nova; //anterior na horizontal aponta para nova
+                nova.Direita = direita; //nova aponta para posterior na horizontal
+                acima.Abaixo = nova; //anterior na vertical aponta para nova
+                nova.Abaixo = abaixo;  //nova aponta para anterior na vertical
+
+                return true; //retorna true, pois inseriu
             }
             else
-                return false;
+                return false; //retorna false, pois não inseriu
         }
         else
-            return false;
+            return false; //retorna false, pois não inseriu
     }
 
     public bool Remover(int linha, int coluna)
     {
-        if (linha <= qtasLinhas && coluna <= qtasColunas)
+        if (linha > 0 && linha <= qtasLinhas && coluna > 0 && coluna <= qtasColunas)
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo)) //verifica se a posição para remover está ocupada
             {
-                esquerda.Direita = direita.Direita;
-                acima.Abaixo = abaixo.Abaixo;
+                esquerda.Direita = direita.Direita; //anterior horizontal aponta para posterior na horizontal, ou seja, se exclui apontadores da celula do meio
+                acima.Abaixo = abaixo.Abaixo; //anterior vertical aponta para posterior na vertical, ou seja, se exclui apontadores da celula do meio
             }
-            return true;
+            return true; //retorna true, pois excluiu ou já não existia
         }
         else
-            return false;
+            return false; //retorna false, pois posição era inválida
     }
 
-    public void LimparMatriz()
+    public void LimparMatriz() //nós cabeças voltam a apontar para si mesmos onde se tinham valores
     {
-        for (Celula atual = cabeca.Abaixo; atual!= cabeca ;atual = atual.Abaixo)
+        for (Celula atual = cabeca.Abaixo; atual != cabeca; atual = atual.Abaixo)
         {
             atual.Direita = atual;
         }
 
-        for(Celula atual = cabeca.Direita; atual!= cabeca; atual = atual.Direita)
+        for (Celula atual = cabeca.Direita; atual != cabeca; atual = atual.Direita)
         {
             atual.Abaixo = atual;
         }
@@ -197,28 +204,32 @@ public class ListaCruzada
 
     public void SomarConstanteK(int coluna, double k)
     {
-        Celula atual = cabeca.Direita;
-        for(int i = 2; i<=coluna;i++)
+        if (k != 0)
         {
-            atual = atual.Direita;
-        }
+            Celula atual = cabeca.Direita;
+            for (int i = 2; i <= coluna; i++) //percorre-se por cabeças até a que corresponder à coluna desejada
+                atual = atual.Direita;
 
-        Celula atualCabeca = atual;
-        atual = atual.Abaixo;
-        int linha = 0;
-        while (linha != qtasLinhas)
-        {
-            linha++;
-            if (atual == atualCabeca || atual.Linha != linha)
-                Inserir(linha, coluna, k);
-            else
+            Celula atualCabeca = atual; //guarda-se a cabeça, pois atual percorrerá para baixo
+            atual = atual.Abaixo; //primeira posição válida da coluna de nó cabeca "cabecaAtual"
+
+            int linha = 1;
+            while (linha <= qtasLinhas) //enquanto não se percorrer todas as linhas
             {
-                if (atual.Valor + k == 0)
-                    Remover(atual.Linha, atual.Coluna);
+                if (atual == atualCabeca || atual.Linha != linha) //se o atual tiver voltado a ser o cabeça mas ainda não se acabou a quantidade de linhas ou
+                                                                  // se a próxima celula linha não corresponder à linha desejada, adiciona-se uma celula com o valor a ser somado
+                    Inserir(linha, coluna, k);
                 else
-                    atual.Valor = atual.Valor + k;
+                {
+                    if (atual.Valor + k == 0) //se a soma resultar em 0, apaga-se a célula
+                        Remover(atual.Linha, atual.Coluna);
+                    else
+                        atual.Valor = atual.Valor + k; //se a soma tiver sucesso, soma-se os valores
 
-                atual = atual.Abaixo;
+                    atual = atual.Abaixo; //desce atual
+                }
+
+                linha++; //aumenta na contagem de linhas
             }
         }
     }
@@ -306,43 +317,49 @@ public class ListaCruzada
 
     public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
     {
-        ListaCruzada matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
-
-        Celula cabecaThis = cabeca.Abaixo;
-
-        int linha = 1;
-        int coluna = 1;
-        while(cabecaThis != cabeca)
+        ListaCruzada matrizMultiplicada = null;
+        if (qtasColunas == outra.qtasLinhas)
         {
-            Celula cabecaColuna = outra.cabeca.Direita;
-            while(cabecaColuna != outra.cabeca)
+            matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
+
+            Celula cabecaThis = cabeca.Abaixo;
+
+            int linha = 1;
+            while (cabecaThis != cabeca)
             {
-                Celula atualColuna = cabecaColuna.Abaixo;
-                Celula atualLinha = cabecaThis.Direita;
-                
-                double resultado = 0;
-                while (atualColuna != cabecaColuna && atualLinha != cabecaThis)
+                int coluna = 1;
+                Celula cabecaColuna = outra.cabeca.Direita;
+                while (cabecaColuna != outra.cabeca)
                 {
-                    if (atualLinha != cabecaThis && atualLinha.Coluna == atualColuna.Linha)
+                    Celula atualColuna = cabecaColuna.Abaixo;
+                    Celula atualLinha = cabecaThis.Direita;
+
+                    double resultado = 0;
+                    while (atualColuna != cabecaColuna && atualLinha != cabecaThis)
                     {
-                        resultado += atualLinha.Valor * atualColuna.Valor;
+                        if (atualLinha != cabecaThis && atualLinha.Coluna == atualColuna.Linha)
+                        {
+                            resultado += atualLinha.Valor * atualColuna.Valor;
+                            atualColuna = atualColuna.Abaixo;
+                            atualLinha = atualLinha.Direita;
+                        }
+
+                        else if (atualLinha.Coluna > atualColuna.Linha)
+                            atualColuna = atualColuna.Abaixo;
+
+                        else if (atualLinha != cabecaThis)
+                            atualLinha = atualLinha.Direita;
                     }
 
-                    else if (atualLinha.Coluna > atualColuna.Linha)
-                        atualColuna = atualColuna.Abaixo;
+                    matrizMultiplicada.Inserir(linha, coluna, resultado);
 
-                    else if(atualLinha != cabecaThis)
-                        atualLinha = atualLinha.Direita;
+                    cabecaColuna = cabecaColuna.Direita;
+                    coluna++;
                 }
 
-                matrizMultiplicada.Inserir(linha, coluna, resultado);
-
-                cabecaColuna = cabecaColuna.Direita;
-                coluna++;
+                cabecaThis = cabecaThis.Abaixo;
+                linha++;
             }
-
-            cabecaThis = cabecaThis.Abaixo;
-            linha++;
         }
 
         return matrizMultiplicada;

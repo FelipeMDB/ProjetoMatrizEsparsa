@@ -159,10 +159,15 @@ namespace MatrizEsparsa
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
             ListaCruzada resultado = matriz1.MultiplicarMatrizes(matriz2);
-            Listar(resultado, dgvResultado);                                //listamos a matriz
-            lblResultados.Visible = true;
-            lblResultados.Text = "Resultado da Multiplicação:";
-            tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
+            if (resultado != null)
+            {
+                Listar(resultado, dgvResultado);                                //listamos a matriz
+                lblResultados.Visible = true;
+                lblResultados.Text = "Resultado da Multiplicação:";
+                tbMatrizes.SelectedTab = tabResultados;                        //usuário é direcionada a tab com o resultado
+            }
+            else
+                MessageBox.Show("As matrizes não são compatíveis para multiplicação");
         }
 
         private void Matrizes_Load(object sender, EventArgs e)

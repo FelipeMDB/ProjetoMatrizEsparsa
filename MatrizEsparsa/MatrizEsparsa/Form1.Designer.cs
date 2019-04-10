@@ -135,10 +135,14 @@
             // 
             // dgvMatrizDois
             // 
+            this.dgvMatrizDois.AllowUserToAddRows = false;
+            this.dgvMatrizDois.AllowUserToDeleteRows = false;
             this.dgvMatrizDois.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizDois.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatrizDois.ColumnHeadersVisible = false;
             this.dgvMatrizDois.Location = new System.Drawing.Point(25, 23);
             this.dgvMatrizDois.Name = "dgvMatrizDois";
+            this.dgvMatrizDois.RowHeadersVisible = false;
             this.dgvMatrizDois.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizDois.TabIndex = 10;
             // 
@@ -428,9 +432,14 @@
             // 
             // dgvResultado
             // 
+            this.dgvResultado.AllowUserToAddRows = false;
+            this.dgvResultado.AllowUserToDeleteRows = false;
+            this.dgvResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultado.ColumnHeadersVisible = false;
             this.dgvResultado.Location = new System.Drawing.Point(191, 80);
             this.dgvResultado.Name = "dgvResultado";
+            this.dgvResultado.RowHeadersVisible = false;
             this.dgvResultado.Size = new System.Drawing.Size(706, 394);
             this.dgvResultado.TabIndex = 0;
             // 
