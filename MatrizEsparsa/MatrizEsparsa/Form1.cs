@@ -195,7 +195,10 @@ namespace MatrizEsparsa
                         AlterarValor(linha, coluna, valor);
                 }
                 else
+                {
                     MessageBox.Show("Digite um valor válido");       //lista a matriz
+                    Listar(matriz1,dgvMatrizUm);
+                }
             }
 
         }

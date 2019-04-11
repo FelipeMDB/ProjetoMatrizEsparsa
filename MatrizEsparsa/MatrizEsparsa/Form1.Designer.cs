@@ -77,12 +77,12 @@
             this.dgvMatrizUm.AllowUserToAddRows = false;
             this.dgvMatrizUm.AllowUserToDeleteRows = false;
             this.dgvMatrizUm.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvMatrizUm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizUm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizUm.ColumnHeadersVisible = false;
             this.dgvMatrizUm.Location = new System.Drawing.Point(139, 23);
             this.dgvMatrizUm.Name = "dgvMatrizUm";
             this.dgvMatrizUm.RowHeadersVisible = false;
+            this.dgvMatrizUm.RowHeadersWidth = 20;
             this.dgvMatrizUm.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizUm.TabIndex = 0;
             this.dgvMatrizUm.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatrizUm_CellValueChanged);
@@ -140,11 +140,11 @@
             this.dgvMatrizDois.AllowUserToAddRows = false;
             this.dgvMatrizDois.AllowUserToDeleteRows = false;
             this.dgvMatrizDois.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvMatrizDois.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizDois.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizDois.ColumnHeadersVisible = false;
             this.dgvMatrizDois.Location = new System.Drawing.Point(25, 23);
             this.dgvMatrizDois.Name = "dgvMatrizDois";
+            this.dgvMatrizDois.ReadOnly = true;
             this.dgvMatrizDois.RowHeadersVisible = false;
             this.dgvMatrizDois.Size = new System.Drawing.Size(387, 322);
             this.dgvMatrizDois.TabIndex = 10;
