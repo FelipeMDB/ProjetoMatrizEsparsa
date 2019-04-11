@@ -136,6 +136,7 @@ namespace MatrizEsparsa
 
         private void btnSomarMatrizes_Click(object sender, EventArgs e)   //chama método que Soma duas matrizes 
         {
+            dgvResultado.Columns.Clear();
             ListaCruzada resultado = matriz1.SomarMatrizes(matriz2);      //criamos uma terceira matriz que é a soma das duas já existentes
             if (resultado != null)
             {
@@ -158,6 +159,7 @@ namespace MatrizEsparsa
 
         private void btnMultiplicarMatrizes_Click(object sender, EventArgs e)
         {
+            dgvResultado.Columns.Clear();
             ListaCruzada resultado = matriz1.MultiplicarMatrizes(matriz2);
             if (resultado != null)
             {

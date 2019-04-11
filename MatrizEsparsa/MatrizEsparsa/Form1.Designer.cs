@@ -452,7 +452,6 @@
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
             this.dgvResultado.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultado.ColumnHeadersVisible = false;
             this.dgvResultado.Location = new System.Drawing.Point(191, 80);
