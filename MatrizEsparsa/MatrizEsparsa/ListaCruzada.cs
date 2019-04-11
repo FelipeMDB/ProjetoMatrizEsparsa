@@ -45,7 +45,44 @@ public class ListaCruzada
     //parâmetros: linha, coluna 
     private bool ExisteCelula(int linha, int coluna, ref Celula esquerda, ref Celula direita, ref Celula acima, ref Celula abaixo)
     {
-        bool existe = false;             
+        bool existe = ExisteColuna(linha, coluna, ref acima, ref abaixo);
+
+        ExisteLinha(linha, coluna, ref esquerda, ref direita);
+
+        return existe;
+    }
+
+    private bool ExisteLinha(int linha, int coluna, ref Celula esquerda, ref Celula direita)
+    {
+        Celula atual = cabeca;   //voltamos 'atual' para o no cabeca para assim nos posicionar na linha passada como parametro         
+        for (int i = 1; i <= linha; i++)
+            atual = atual.Abaixo;
+
+        Celula cabecaLinha = atual;     //uma celula de cabeca de linha é criada e é posicionada na linha passada de parametro
+        bool achouPosicao = false;
+        bool existe = false;
+        esquerda = atual;
+        //agora procuraremos as células à esquerda e à direita da posição desejada
+        while (!achouPosicao)
+        {
+            direita = esquerda.Direita;   // posicionamos a direita 
+            if (direita == cabecaLinha)
+                achouPosicao = true;
+            else if (direita.Coluna > coluna)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
+                achouPosicao = true;
+            else if (direita.Coluna == coluna)  // caso a atual seja igual a desejada, encontramos a posição
+                achouPosicao = true;
+
+            if (!achouPosicao)    //caso não encontre a posição, segue para a próxima célula da linha
+                esquerda = esquerda.Direita;
+        }
+
+        return existe;
+    }
+
+    private bool ExisteColuna(int linha, int coluna, ref Celula acima, ref Celula abaixo)
+    {
+        bool existe = false;
         Celula atual = cabeca;
 
         for (int i = 1; i <= coluna; i++)   //posicionamos o atual na coluna desejada
@@ -54,11 +91,11 @@ public class ListaCruzada
         Celula cabecaColuna = atual;
         bool achouPosicao = false;
         acima = atual;      //posicionamos 'acima' na coluna desejada
-        while (!achouPosicao)                
+        while (!achouPosicao)
         {
             abaixo = acima.Abaixo;        //saimos da cabeca da coluna e vamos para a posicao abaixo
             if (abaixo == cabecaColuna)  //caso sejam iguais, 'achouPosicao' recebe true  
-                achouPosicao = true;    
+                achouPosicao = true;
 
             else if (abaixo.Linha > linha)  //caso a posicao atual seja maior que a desejada, significa que a desejada se encontra
                 achouPosicao = true;            //antes da atual, mas não existe uma celula nesta posicao
@@ -73,28 +110,6 @@ public class ListaCruzada
                 acima = acima.Abaixo;                    //da coluna, descemos para a próxima posição
         }
         //ao final deste método você acha a posicao das celulas que estão acima e abaixo da posição procurada 
-
-        atual = cabeca;   //voltamos 'atual' para o no cabeca para assim nos posicionar na linha passada como parametro         
-        for (int i = 1; i <= linha; i++) 
-            atual = atual.Abaixo;
-
-        Celula cabecaLinha = atual;     //uma celula de cabeca de linha é criada e é posicionada na linha passada de parametro
-        achouPosicao = false;          
-        esquerda = atual;
-        //agora procuraremos as células à esquerda e à direita da posição desejada
-        while (!achouPosicao)
-        {
-            direita = esquerda.Direita;   // posicionamos a direita 
-            if (direita == cabecaLinha)  
-                achouPosicao = true;    
-            else if (direita.Coluna > coluna)     //se a posição atual é maior que a desejada, a desejada está em uma posição antes
-                achouPosicao = true;                
-            else if (direita.Coluna == coluna)  // caso a atual seja igual a desejada, encontramos a posição
-                achouPosicao = true;
-
-            if (!achouPosicao)    //caso não encontre a posição, segue para a próxima célula da linha
-                esquerda = esquerda.Direita;
-        }
 
         return existe;
     }
@@ -139,9 +154,9 @@ public class ListaCruzada
     {
         if (linha <= qtasLinhas && linha > 0 && coluna <= qtasColunas && coluna > 0) //verifica-se se linha e coluna fornecidos estão nos limites da matriz
         {
-            Celula acima = null, abaixo = null, direita = null, esquerda = null; //celulas para método existe
+            Celula acima = null, abaixo = null;//celulas para método existeColuna
 
-            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo)) //método existe retorna "abaixo" e "direita" como sendo o procurado
+            if (ExisteColuna(linha, coluna, ref acima, ref abaixo)) //abaixo é o valor procurado
             {
                 return abaixo.Valor;
             }
@@ -156,8 +171,10 @@ public class ListaCruzada
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-            if (!ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+            if (!ExisteColuna(linha, coluna, ref acima, ref abaixo)) //procura para saber se existe
             {
+                ExisteLinha(linha, coluna, ref esquerda, ref direita); //para pegar posições esquerda e direita apenas se existe, deixando o processo mais rápido
+
                 Celula nova = new Celula(null, null, linha, coluna, valor); //célula nova que será inserida
                 esquerda.Direita = nova; //anterior na horizontal aponta para nova
                 nova.Direita = direita; //nova aponta para posterior na horizontal
@@ -179,8 +196,10 @@ public class ListaCruzada
         {
             Celula acima = null, abaixo = null, direita = null, esquerda = null;
 
-            if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo)) //verifica se a posição para remover está ocupada
+            if (ExisteColuna(linha, coluna, ref acima, ref abaixo)) //verifica se a posição para remover está ocupada
             {
+                ExisteLinha(linha, coluna, ref esquerda, ref direita); //para pegar posições esquerda e direita apenas se existe, deixando o processo mais rápido
+
                 esquerda.Direita = direita.Direita; //anterior horizontal aponta para posterior na horizontal, ou seja, se exclui apontadores da celula do meio
                 acima.Abaixo = abaixo.Abaixo; //anterior vertical aponta para posterior na vertical, ou seja, se exclui apontadores da celula do meio
             }
@@ -237,9 +256,10 @@ public class ListaCruzada
 
     public ListaCruzada SomarMatrizes(ListaCruzada outra) //método responsável por realizar a soma de duas matrizes
     {
+        ListaCruzada matrizSoma = null;
         if (qtasLinhas == outra.qtasLinhas && qtasColunas == outra.qtasColunas)  //verificamos se as matrizes são de dimensões iguais   
         {
-            ListaCruzada matrizSoma = new ListaCruzada(qtasLinhas, qtasColunas); //instanciamos a matriz que será o resultado
+            matrizSoma = new ListaCruzada(qtasLinhas, qtasColunas); //instanciamos a matriz que será o resultado
 
             Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;  //criamos as celulas de cabeca de linha e coluna 
                                                                              //que serão utilizadas como parametro ao longo do método
@@ -337,57 +357,61 @@ public class ListaCruzada
             }
             return matrizSoma; //retornamos a matriz somada
         }
-        return null; //retorna null caso as matrizes não sejam de tamanho igual 
+        return matrizSoma; //retorna null caso as matrizes não sejam de tamanho igual 
     }
 
     public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
     {
         ListaCruzada matrizMultiplicada = null;
-        if (qtasColunas == outra.qtasLinhas)
+
+        if (qtasColunas == outra.qtasLinhas) //para as matrizes serem compatíveis para multiplicação o numero de colunas de uma deve ser igual ao numero de linhas da outra
         {
-            matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas);
+            matrizMultiplicada = new ListaCruzada(qtasLinhas, outra.qtasColunas); //a matriz resultante possui o numero de linhas da primeira e de colunas da segunda
 
-            Celula cabecaThis = cabeca.Abaixo;
+            Celula cabecaThis = cabeca.Abaixo; // cabecaThis representa as cabecas das linhas do this
 
-            int linha = 1;
-            while (cabecaThis != cabeca)
+            int linha = 1; //começa na linha 1
+            while (cabecaThis != cabeca) //as cabecas das linhas do this são percorridas até que se retorne à cabeca
             {
-                int coluna = 1;
-                Celula cabecaColuna = outra.cabeca.Direita;
-                while (cabecaColuna != outra.cabeca)
-                {
-                    Celula atualColuna = cabecaColuna.Abaixo;
-                    Celula atualLinha = cabecaThis.Direita;
+                int coluna = 1; //começa na coluna 1
+                Celula cabecaOutra = outra.cabeca.Direita; // cabecaOutra representa as cabecas das colunas da matriz outra 
 
-                    double resultado = 0;
-                    while (atualColuna != cabecaColuna && atualLinha != cabecaThis)
+                while (cabecaOutra != outra.cabeca) // as cabecas das colunas da outra são percorridas até que se retorne à cabeca desta
+                {
+                    Celula atualColunaOutra = cabecaOutra.Abaixo; //percorre as linhas referentes à coluna apontada pelo cabecaOutra
+                    Celula atualLinhaThis = cabecaThis.Direita; //percorre as colunas referentes à linha apontada pelo cabecaThis
+
+                    double resultado = 0; //armazena o resultado da multiplicação
+                    while (atualColunaOutra != cabecaOutra && atualLinhaThis != cabecaThis) //percorre até que um dos atuais chegue à sua cabeça correspondente
                     {
-                        if (atualLinha != cabecaThis && atualLinha.Coluna == atualColuna.Linha)
-                        {
-                            resultado += atualLinha.Valor * atualColuna.Valor;
-                            atualColuna = atualColuna.Abaixo;
-                            atualLinha = atualLinha.Direita;
+                        if (atualLinhaThis.Coluna == atualColunaOutra.Linha) //na multiplicação a coluna da primeira matriz
+                                                                             // será multiplicada à linha de numero correspondente da outra, por isso verificamos
+                                                                             // se os seus valores correspondem
+                        { 
+                            resultado += atualLinhaThis.Valor * atualColunaOutra.Valor; //multiplica-se os elementos e se soma a resultado
+                            atualColunaOutra = atualColunaOutra.Abaixo; //anda atualColunaOutra
+                            atualLinhaThis = atualLinhaThis.Direita;    //anda atualLinhaThis
                         }
 
-                        else if (atualLinha.Coluna > atualColuna.Linha)
-                            atualColuna = atualColuna.Abaixo;
+                        else if (atualLinhaThis.Coluna > atualColunaOutra.Linha) //se não corresponderem e a coluna do this for maior que a linha do outra, apenas a outra anda
+                            atualColunaOutra = atualColunaOutra.Abaixo;
 
-                        else if (atualLinha != cabecaThis)
-                            atualLinha = atualLinha.Direita;
+                        else //se o contrário dos anteriores ocorrer, apenas a linha anda
+                            atualLinhaThis = atualLinhaThis.Direita;
                     }
 
-                    matrizMultiplicada.Inserir(linha, coluna, resultado);
+                    matrizMultiplicada.Inserir(linha, coluna, resultado); //insere-se o resultado na matriz multiplicada, na linha e coluna contadas pelas variáveis linha e coluna
 
-                    cabecaColuna = cabecaColuna.Direita;
-                    coluna++;
+                    cabecaOutra = cabecaOutra.Direita; //anda para a próxima cabeça
+                    coluna++; //aumenta coluna
                 }
 
-                cabecaThis = cabecaThis.Abaixo;
-                linha++;
+                cabecaThis = cabecaThis.Abaixo; //anda para a próxima cabeça
+                linha++; //aumenta linha
             }
         }
 
-        return matrizMultiplicada;
+        return matrizMultiplicada; //retorna a matriz multiplicada que, se os elementos não forem compatíveis, é null
     }
 
 
@@ -426,19 +450,21 @@ public class ListaCruzada
 
     public bool Alterar(int linha, int coluna, double valor)
     {
-        Celula acima = null, abaixo = null, direita = null, esquerda = null;
+        Celula acima = null, abaixo = null;
         
-        if (ExisteCelula(linha, coluna, ref esquerda, ref direita, ref acima, ref abaixo))
+        if (ExisteColuna(linha, coluna, ref acima, ref abaixo)) //procura-se apenas pela coluna
         {
             if (valor == 0)
             {
+                Celula direita = null, esquerda = null;
+                ExisteLinha(linha, coluna, ref esquerda, ref direita); //pega-se direita e esquerda para excluir, não chamamos método remover para não se procurar abaixo e acima novamente
+
                 esquerda.Direita = direita.Direita;
                 acima.Abaixo = abaixo.Abaixo;
                 return true;
             }
             else
             {
-                direita.Valor = valor;
                 abaixo.Valor = valor;
                 return true;
             }
@@ -446,6 +472,9 @@ public class ListaCruzada
         else
         {
             Celula nova = new Celula(null, null, linha, coluna, valor);
+
+            Celula direita = null, esquerda = null;
+            ExisteLinha(linha, coluna, ref esquerda, ref direita); //pega-se direita e esquerda para incluir, não chamamos método inserir para não se procurar abaixo e acima novamente
 
             esquerda.Direita = nova;
             nova.Direita = direita;
