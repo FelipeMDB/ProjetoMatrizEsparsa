@@ -76,6 +76,7 @@
             // 
             this.dgvMatrizUm.AllowUserToAddRows = false;
             this.dgvMatrizUm.AllowUserToDeleteRows = false;
+            this.dgvMatrizUm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvMatrizUm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizUm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizUm.ColumnHeadersVisible = false;
@@ -100,10 +101,11 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(452, 0);
+            this.label1.Location = new System.Drawing.Point(419, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(285, 30);
             this.label1.TabIndex = 7;
@@ -137,6 +139,7 @@
             // 
             this.dgvMatrizDois.AllowUserToAddRows = false;
             this.dgvMatrizDois.AllowUserToDeleteRows = false;
+            this.dgvMatrizDois.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvMatrizDois.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvMatrizDois.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrizDois.ColumnHeadersVisible = false;
@@ -232,6 +235,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.btnSomarK);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -276,6 +280,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox2.Controls.Add(this.btnSomarMatrizes);
             this.groupBox2.Controls.Add(this.btnMultiplicarMatrizes);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -289,6 +294,7 @@
             // 
             // btnLerMatrizDois
             // 
+            this.btnLerMatrizDois.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLerMatrizDois.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLerMatrizDois.ForeColor = System.Drawing.SystemColors.WindowText;
             this.btnLerMatrizDois.Location = new System.Drawing.Point(418, 38);
@@ -301,6 +307,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox3.Controls.Add(this.btnSalvar);
             this.groupBox3.Controls.Add(this.btnExibirMatrizUm);
             this.groupBox3.Controls.Add(this.btnLerMatrizUm);
@@ -316,6 +323,7 @@
             // 
             // btnSalvar
             // 
+            this.btnSalvar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSalvar.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnSalvar.Location = new System.Drawing.Point(6, 196);
             this.btnSalvar.Name = "btnSalvar";
@@ -327,6 +335,7 @@
             // 
             // btnExibirMatrizUm
             // 
+            this.btnExibirMatrizUm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnExibirMatrizUm.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExibirMatrizUm.Location = new System.Drawing.Point(6, 89);
             this.btnExibirMatrizUm.Name = "btnExibirMatrizUm";
@@ -338,6 +347,7 @@
             // 
             // btnLerMatrizUm
             // 
+            this.btnLerMatrizUm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLerMatrizUm.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnLerMatrizUm.Location = new System.Drawing.Point(6, 38);
             this.btnLerMatrizUm.Name = "btnLerMatrizUm";
@@ -349,6 +359,7 @@
             // 
             // btnLimpar
             // 
+            this.btnLimpar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLimpar.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpar.Location = new System.Drawing.Point(6, 141);
             this.btnLimpar.Name = "btnLimpar";
@@ -360,6 +371,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox4.Controls.Add(this.btnExibirMatrizDois);
             this.groupBox4.Controls.Add(this.btnLerMatrizDois);
             this.groupBox4.Controls.Add(this.dgvMatrizDois);
@@ -373,6 +385,7 @@
             // 
             // btnExibirMatrizDois
             // 
+            this.btnExibirMatrizDois.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnExibirMatrizDois.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExibirMatrizDois.Location = new System.Drawing.Point(418, 87);
             this.btnExibirMatrizDois.Name = "btnExibirMatrizDois";
@@ -384,6 +397,9 @@
             // 
             // tbMatrizes
             // 
+            this.tbMatrizes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMatrizes.Controls.Add(this.tabPage1);
             this.tbMatrizes.Controls.Add(this.tabResultados);
             this.tbMatrizes.Location = new System.Drawing.Point(12, 12);
@@ -421,6 +437,7 @@
             // 
             // lblResultados
             // 
+            this.lblResultados.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblResultados.AutoSize = true;
             this.lblResultados.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultados.Location = new System.Drawing.Point(188, 40);
@@ -434,6 +451,7 @@
             // 
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
+            this.dgvResultado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultado.ColumnHeadersVisible = false;
