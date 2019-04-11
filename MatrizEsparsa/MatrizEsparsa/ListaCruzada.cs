@@ -235,38 +235,45 @@ public class ListaCruzada
         }
     }
 
-    public ListaCruzada SomarMatrizes(ListaCruzada outra)
+    public ListaCruzada SomarMatrizes(ListaCruzada outra) //método responsável por realizar a soma de duas matrizes
     {
-        if (qtasLinhas == outra.qtasLinhas && qtasColunas == outra.qtasColunas)
+        if (qtasLinhas == outra.qtasLinhas && qtasColunas == outra.qtasColunas)  //verificamos se as matrizes são de dimensões iguais   
         {
-            ListaCruzada matrizSoma = new ListaCruzada(qtasLinhas, qtasColunas);
+            ListaCruzada matrizSoma = new ListaCruzada(qtasLinhas, qtasColunas); //instanciamos a matriz que será o resultado
 
-            Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
-
-            while (colunaThis != cabeca || colunaOutra != outra.cabeca)
+            Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;  //criamos as celulas de cabeca de linha e coluna 
+                                                                             //que serão utilizadas como parametro ao longo do método
+            while (colunaThis != cabeca || colunaOutra != outra.cabeca)     //enquanto a coluna não tiver acabado
             {
-                if (colunaThis != cabeca && colunaOutra != outra.cabeca)
+                if (colunaThis != cabeca && colunaOutra != outra.cabeca)   //se as colunas não estiverem na cabeça da matriz 
                 {
-                    Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
+                    Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra; //criamos cabecas de linha e as posicionamos
 
-                    Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
+                    Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo; // posicionamos a variavel na celula
 
-                    while (linhaThis != linhaCabecaThis || linhaOutra != linhaCabecaOutra)
+                    while (linhaThis != linhaCabecaThis || linhaOutra != linhaCabecaOutra) //enquanto não percorrer toda a linha
                     {
-                        if (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
+                        if (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra) //se a linha não estiver vazia
                         {
-                            if (linhaThis.Linha == linhaOutra.Linha)
-                            {
-                                if (linhaThis.Valor + linhaOutra.Valor != 0)
-                                    matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor);
-                                linhaThis = linhaThis.Abaixo;
+                            if (linhaThis.Linha == linhaOutra.Linha)  // se elas estiverem na mesma linha, significa que há valor 
+                            {                                        //nas duas matrizes nesta posição
+                                if (linhaThis.Valor + linhaOutra.Valor != 0) //se a soma dos valores for diferente de zero
+                                    matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor + linhaOutra.Valor); //inserimos na matriz a soma
+                                linhaThis = linhaThis.Abaixo;   //descemos para a próxima linha
                                 linhaOutra = linhaOutra.Abaixo;
                             }
-                            else if (linhaThis.Linha < linhaOutra.Linha)
+
+                            //se a linha atual for menor, significa que na outra matriz
+                            //não há nenhum valor na linha da matriz this
+                            else if (linhaThis.Linha < linhaOutra.Linha) 
                             {
+                                //portanto apenas inserimos ['this' na matriz e seguimos para a próxima linha
                                 matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
                                 linhaThis = linhaThis.Abaixo;
                             }
+
+                            //no caso abaixo não há nenhum valor nesta linha na this, mas há na outra
+                            //portanto apenas inserimos a outra na nova matriz
                             else
                             {
                                 matrizSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
@@ -274,21 +281,34 @@ public class ListaCruzada
                             }
 
                         }
+                        //se só a this é diferente da cabeça da coluna
+                        //inserimos a celula da this na nova matriz
+                        //e seguimos para a próxima linha da this
                         else if (linhaThis != linhaCabecaThis)
                         {
-                            matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor);
+                            matrizSoma.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor); 
                             linhaThis = linhaThis.Abaixo;
                         }
+
+                        //se só a outra é diferente da cabeça da coluna
+                        //inserimos a celula da outra na nova matriz
+                        //e seguimos para a próxima linha da outra
                         else
                         {
                             matrizSoma.Inserir(linhaOutra.Linha, linhaOutra.Coluna, linhaOutra.Valor);
                             linhaOutra = linhaOutra.Abaixo;
                         }
                     }
+
+                    //seguimos para a próxima coluna
                     colunaThis = colunaThis.Direita;
                     colunaOutra = colunaOutra.Direita;
                 }
-                else if (colunaThis != cabeca)
+
+                //caso só a coluna da this seja diferente da cabeca, significa que não tem mais nada na outra
+                //apenas precisaremos inserir os valores da coluna da this
+                //e por fim prosseguimos para a proxima coluna de this 
+                else if (colunaThis != cabeca) 
                 {
                     Celula linhaCabeca = colunaThis;
                     Celula linha = colunaThis.Abaixo;
@@ -299,6 +319,10 @@ public class ListaCruzada
                     }
                     colunaThis = colunaThis.Direita;
                 }
+
+                //caso só a coluna da toutrahis seja diferente da cabeca, significa que não tem mais nada na this
+                //apenas precisaremos inserir os valores da coluna da outra
+                //e por fim prosseguimos para a proxima coluna de outra 
                 else
                 {
                     Celula linhaCabeca = colunaThis;
@@ -311,9 +335,9 @@ public class ListaCruzada
                     colunaOutra = colunaOutra.Direita;
                 }
             }
-            return matrizSoma;
+            return matrizSoma; //retornamos a matriz somada
         }
-        return null;
+        return null; //retorna null caso as matrizes não sejam de tamanho igual 
     }
 
     public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
@@ -366,58 +390,14 @@ public class ListaCruzada
         return matrizMultiplicada;
     }
 
-    //public ListaCruzada MultiplicarMatrizes(ListaCruzada outra)
-    //{
-    //    int qtasLinhasNova = 0, qtasColunasNova;
 
-    //    if (qtasLinhas < outra.qtasLinhas)
-    //        qtasLinhasNova = qtasLinhas;
-    //    else
-    //        qtasLinhasNova = outra.qtasLinhas;
-
-    //    if (qtasColunas < outra.qtasColunas)
-    //        qtasColunasNova = qtasColunas;
-    //    else
-    //        qtasColunasNova = outra.qtasColunas;
-
-    //    ListaCruzada listaMultiplicada = new ListaCruzada(qtasLinhasNova, qtasColunasNova);
-
-    //    Celula colunaThis = cabeca.Direita, colunaOutra = outra.cabeca.Direita;
-
-    //    while (colunaThis != cabeca && colunaOutra != outra.cabeca)
-    //    {
-    //        Celula linhaCabecaThis = colunaThis, linhaCabecaOutra = colunaOutra;
-
-    //        Celula linhaThis = colunaThis.Abaixo, linhaOutra = colunaOutra.Abaixo;
-
-    //        while (linhaThis != linhaCabecaThis && linhaOutra != linhaCabecaOutra)
-    //        {
-    //            if (linhaThis.Linha == linhaOutra.Linha)
-    //            {
-    //                listaMultiplicada.Inserir(linhaThis.Linha, linhaThis.Coluna, linhaThis.Valor * linhaOutra.Valor);
-    //                linhaThis = linhaThis.Abaixo;
-    //                linhaOutra = linhaOutra.Abaixo;
-    //            }
-    //            else if (linhaThis.Linha < linhaOutra.Linha)
-    //            {
-    //                linhaThis = linhaThis.Abaixo;
-    //            }
-    //            else
-    //            {
-    //                linhaOutra = linhaOutra.Abaixo;
-    //            }
-    //        }
-                
-    //        colunaThis = colunaThis.Direita;
-    //        colunaOutra = colunaOutra.Direita;
-    //    }
-        
-    //    return listaMultiplicada;
-    //}
-
-    public void Gravar(StreamWriter arq)
+    //este método grava os valores e posições da matriz no próprio arquivo txt do qual ela foi lida
+    public void Gravar(StreamWriter arq )   
     {
-        arq.WriteLine(qtasLinhas + " " + qtasColunas);
+        //adotamos por padrão que a primeira linha indica a quantidade de linhas e colunas, portanto na primeira leitura salvamos
+        //estes respectivos valores
+        arq.WriteLine(qtasLinhas + " " + qtasColunas); 
+        
         Celula atual = cabeca.Direita;
         int coluna = 1;
         while (atual != cabeca)

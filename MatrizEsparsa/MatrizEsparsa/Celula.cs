@@ -7,7 +7,7 @@ using System.IO;
 
 public class Celula : IGravarEmArquivo
 {
-    protected Celula abaixo;
+    protected Celula abaixo;  //c
     protected Celula direita;
     protected double valor;
     protected int linha;
